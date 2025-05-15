@@ -46,7 +46,7 @@ https://blog.byalex.dev/article/dapper-queries-synchronized-with-mssql-database-
 
 ### 🔧 Stack ที่ใช้
 
-* ASP.NET Core 8 Web API
+* ASP.NET Core Web API
 * Dapper (Micro ORM)
 * MSSQL LocalDB
 * Serilog (Logging)
