@@ -18,6 +18,12 @@ Clean Architecture เป็นสถาปัตยกรรมการออ�
 https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 
 #### 1.2 SOLID Principles คืออะไร?
+* S - Single Responsibility Principle (SRP)
+* O - Open/Closed Principle (OCP)
+* L - Liskov Substitution Principle (LSP)
+* I - Interface Segregation Principle (ISP)
+* D - Dependency Inversion Principle (DIP)
+
 SOLID เป็นหลักการ 5 ข้อในการออกแบบ Object-Oriented Programming เพื่อให้โค้ดมีความยืดหยุ่น เข้าใจง่าย และบำรุงรักษาง่าย:
 * **S - Single Responsibility Principle (SRP):** Class หนึ่งควรมีหน้าที่รับผิดชอบเพียงอย่างเดียว
 * **O - Open/Closed Principle (OCP):** Software entities (classes, modules, functions, etc.) ควรจะเปิดสำหรับการขยาย (extension) แต่ปิดสำหรับการแก้ไข (modification)
