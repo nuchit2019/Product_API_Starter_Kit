@@ -36,7 +36,7 @@ https://blog.byalex.dev/article/dapper-queries-synchronized-with-mssql-database-
 
 
 #### 1.4 เครื่องมือที่ต้องใช้:
-1.  **Visual Studio 2022** (หรือเวอร์ชันใหม่กว่า) พร้อม .NET SDK (แนะนำ .NET 6.0 หรือใหม่กว่า)
+1.  **Visual Studio 2022** (หรือเวอร์ชันใหม่กว่า) พร้อม .NET SDK (แนะนำ .NET 8.0 หรือใหม่กว่า)
 2.  **SQL Server Management Studio (SSMS)** หรือเครื่องมือจัดการฐานข้อมูล SQL Server อื่นๆ
 3.  **SQL Server LocalDB** (มักจะติดตั้งมาพร้อมกับ Visual Studio)
 4.  **Postman** หรือเครื่องมืออื่นสำหรับทดสอบ API
