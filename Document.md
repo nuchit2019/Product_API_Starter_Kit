@@ -28,7 +28,7 @@ SOLID คือชุดของหลักการ 5 ข้อ ที่ช�
 | **O** | Open/Closed Principle (SRP)           | แก้ระบบโดยไม่ต้องแก้โค้ดเดิม        |
 | **L** | Liskov Substitution Principle (SRP)   | Subclass แทน Superclass ได้         |
 | **I** | Interface Segregation Principle (SRP) | Interface แยกเฉพาะสิ่งที่จำเป็น     |
-| **D** | Dependency Inversion Principle (SRP)  | พึ่ง abstraction ไม่พึ่ง class จริง(interface) |
+| **D** | Dependency Inversion Principle (SRP)  | พึ่ง abstraction, interface ไม่พึ่ง class จริง |
 
 #
 
