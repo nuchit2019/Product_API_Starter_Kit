@@ -151,7 +151,5 @@ dotnet run --project ProductAPI.csproj
 ## 👨‍💻 Author
 
 > Template นี้สนับสนุน โดยทีมพัฒนา (Core System)
-> ติดตามเพิ่มเติม: [https://github.com/nuchit2019/
-/Product_API_Starter_Kit](https://github.com/nuchit2019/Product_API_Starter_Kit)
  
 #
