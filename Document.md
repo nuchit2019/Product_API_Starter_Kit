@@ -163,7 +163,7 @@ cd ProductAPI
 ```bash
 mkdir Domain Application Infrastructure Common
 ```
-หรือใน VS2022/Explorer:
+หรือสร้างโฟลเดอร์ใน VS2022/Explorer,VSCode:
 
 ```
 ProductAPI/
