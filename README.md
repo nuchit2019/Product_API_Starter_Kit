@@ -41,6 +41,7 @@ Dapper เป็น Micro ORM (Object-Relational Mapper) สำหรับ .NET
 4.  **Postman** หรือเครื่องมืออื่นสำหรับทดสอบ API
 
 ![image](https://github.com/user-attachments/assets/9b9a7864-5b92-4450-b2a0-292bcea74210)
+https://blog.byalex.dev/article/dapper-queries-synchronized-with-mssql-database-schema
 
 ### 2. การสร้างโปรเจกต์ (Project Creation)
 
