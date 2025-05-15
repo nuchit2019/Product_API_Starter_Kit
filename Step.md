@@ -103,28 +103,26 @@ CREATE TABLE Products (
 ### ✅ Step 1: สร้าง Solution และ Project
 
 ```bash
-dotnet new sln -n ProductAPI
-cd ProductAPI
-
-dotnet new classlib -n ProductAPI.Domain
-dotnet new classlib -n ProductAPI.Application
-dotnet new classlib -n ProductAPI.Infrastructure
-dotnet new classlib -n ProductAPI.Shared
-dotnet new webapi   -n ProductAPI.Presentation.WebAPI
-
-dotnet sln add ./ProductAPI.Domain
-dotnet sln add ./ProductAPI.Application
-dotnet sln add ./ProductAPI.Infrastructure
-dotnet sln add ./ProductAPI.Shared
-dotnet sln add ./ProductAPI.Presentation.WebAPI
+dotnet new webapi -n ProductAPI
+cd ProductAPI 
 ```
+### ✅ Step 2: สร้างโฟลเดอร์ตาม Clean Architecture
 
-**🔁 อ้างอิง Project กัน:**
+```bash
+mkdir Domain Application Infrastructure Common
+```
+หรือใน VS2022/Explorer:
 
-* `Presentation.WebAPI` → Reference ทุก Layer
-* `Application` → Reference `Domain`, `Shared`
-* `Infrastructure` → Reference `Application`, `Domain`, `Shared`
-
+```
+ProductAPI/
+├── Controllers/
+├── Domain/              🧠 Entities, ValueObjects
+├── Application/         🧠 DTOs, Interfaces, Services
+├── Infrastructure/      🧠 Repositories, DB Access (Dapper)
+├── Common/              🧠 Shared things (ApiResponse, Exceptions, Middlewares)
+├── Program.cs, appsettings.json, etc.
+```
+ 
 #
 
 ## 4️⃣ Step-by-Step การเขียน Code (พร้อมอธิบายหลัก SOLID และ Clean Code)
