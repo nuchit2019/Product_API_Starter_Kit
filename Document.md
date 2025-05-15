@@ -551,7 +551,7 @@ namespace ProductAPI.Controllers
 
 #
 
-### ✅ 4.6 Middleware + ApiResponse (Shared)
+### ✅ 4.6 Middleware + ApiResponse (Common)
 
 📁 `Common/ApiResponse.cs`
 
