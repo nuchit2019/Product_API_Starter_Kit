@@ -829,4 +829,4 @@ GO
 * **Security:** พิจารณาเรื่อง Authentication และ Authorization (เช่น JWT).
 * **Configuration Management:** จัดการ Configuration ต่างๆ (เช่น Connection Strings, API Keys) อย่างปลอดภัย (เช่น User Secrets, Azure Key Vault).
 
-# ขอบคุณ Chat
+# ขอบคุณ Chat... ChatGPT, Gemini
