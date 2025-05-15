@@ -66,8 +66,9 @@ https://blog.byalex.dev/article/dapper-queries-synchronized-with-mssql-database-
     * ใน Solution Explorer, คลิกขวาที่ Solution `ProductManagement` -> **Add** -> **New Project...**.
     * เลือก **Class Library**. คลิก **Next**.
     * ตั้งชื่อ Project: `ProductManagement.Core.Domain`.
-    * เลือก Framework (เช่น .NET 6.0). คลิก **Create**.
-    [Image of Visual Studio Create Class Library for Domain]
+    * เลือก Framework (เช่น .NET 8.0). คลิก **Create**.
+    ![image](https://github.com/user-attachments/assets/16d07700-b3ec-419a-9ff5-cfe4524a9d93)
+
 
 5.  **สร้าง Project Core.Application:**
     * คลิกขวาที่ Solution -> **Add** -> **New Project...**.
