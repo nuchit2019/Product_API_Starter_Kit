@@ -10,7 +10,7 @@
 ### Branch: Starter คุณควรเริ่มที่นี่:
 https://github.com/nuchit2019/Product_API_Starter_Kit/tree/Starter
 
-### Branch: Final ถ้าคุณติดปัญหา... ดูตัวอย่างที่นี่
+### Branch: Final ถ้าคุณติดปัญหา... ไปแอบดูตัวอย่างที่นี่ ได้...
 https://github.com/nuchit2019/Product_API_Starter_Kit/tree/Final
 
 ### เอกสาร: ความรู้พื้นฐานและเครื่องมือที่ต้องใช้ 
