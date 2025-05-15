@@ -1,4 +1,4 @@
-# Product API Starter Kit
+# CRUD Product API Starter Kit
 Product API Starter Kit: .NET 8 + Dapper + Clean Architecture
 
 #
