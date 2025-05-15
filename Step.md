@@ -1,4 +1,4 @@
-เพื่อจัดทำ **คู่มือการเขียน Code ตามโครงสร้าง Project: ProductAPI** โดยอิงหลัก **Clean Architecture**, **SOLID Principles** และแนวทาง **Clean Code**, ขั้นตอนต่อไปนี้:
+**คู่มือการเขียน Code ตามโครงสร้าง Project: ProductAPI** โดยอิงหลัก **Clean Architecture**, **SOLID Principles** และแนวทาง **Clean Code**, ขั้นตอนต่อไปนี้:
 
 #
 
