@@ -152,4 +152,4 @@ dotnet run --project ProductAPI.csproj
 
 > Template นี้สนับสนุน โดยทีมพัฒนา (Core System)
  
-### ขอบคุณ Chat, {Chatgpt,Gemini Ddeepseek, Qwen, Copilot}
+### ขอบคุณ Chat {Chatgpt,Gemini Ddeepseek, Qwen, Copilot}
