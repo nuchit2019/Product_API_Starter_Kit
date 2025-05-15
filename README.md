@@ -115,7 +115,7 @@ ProductManagement (Solution)
 ### 3. การออกแบบและสร้าง Database (MSSQL LocalDB)
 
 1.  เปิด **SQL Server Management Studio (SSMS)**.
-2.  เชื่อมต่อกับ Server Name: `(localdb)\\mssqllocaldb`. (นี่คือ Default instance name ของ LocalDB)
+2.  เชื่อมต่อกับ Server Name: `(localdb)\mssqllocaldb`. (นี่คือ Default instance name ของ LocalDB)
     ![image](https://github.com/user-attachments/assets/fadca721-8aa0-461e-93ab-49453e541e81)
 
 3.  ใน Object Explorer, คลิกขวาที่ **Databases** -> **New Database...**.
