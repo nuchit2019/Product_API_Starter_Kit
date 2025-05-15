@@ -2,7 +2,7 @@
 
 #
 
-````markdown
+ 
 # 🧱 ProductAPI(.NET 8 + Dapper + Clean Architecture)
 
 > RESTful API สำหรับจัดการสินค้า (Product CRUD)  
