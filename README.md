@@ -17,6 +17,7 @@ https://github.com/nuchit2019/Product_API_Starter_Kit/tree/Final
 https://github.com/nuchit2019/Product_API_Starter_Kit/blob/main/Document.md
 #
 
+# และนี่คือภาพรวม ... 
  
 # 🧱 ProductAPI(.NET 8 + Dapper + Clean Architecture)
 
