@@ -5,7 +5,7 @@
 > เรียนรู้จากโครงสร้างจริง ฝึกจากโปรเจกต์จริง เพื่อทักษะที่ใช้งานได้จริง
 #
 
-# **`CRUD Product API Starter Kit`** สำหรับนักพัฒนาใหม่(New Back-end development (Dev Back-end)) สาย .Net สำหรับฝึกฝีมือ... โปรเจกต์นี้... เน้นอธิบายโครงสร้าง Clean Architecture..., Clean Code..., SOLID Principles..., วิธีรัน..., และ Best Practices... ที่จะทำให้คุณเป็น มืออาชีพ ในเร็ววัน จะช้า... หรือ เร็ว... ขึ้นอยู่กับ การฝใึกซ้อม...และซ้อม... :
+# **`CRUD Product API Starter Kit`** สำหรับนักพัฒนาใหม่(New Back-end development (Dev Back-end)) สาย .Net สำหรับฝึกฝีมือ... โปรเจกต์นี้... เน้นอธิบายโครงสร้าง Clean Architecture..., Clean Code..., SOLID Principles..., วิธีรัน..., และ Best Practices...ในแบบที่ง่ายที่สุด...เพื่อให้การเริ่มต้นนั้นเต็มไปด้วยความสนุก และประสบความสำเร็จ... ที่จะทำให้คุณเป็น มืออาชีพ ในเร็ววัน จะช้า... หรือ เร็ว... ขึ้นอยู่กับ การฝึกซ้อม...และซ้อม...และซ้อม... :
 
 ### Branch: Starter คุณควรเริ่มที่นี่:
 https://github.com/nuchit2019/Product_API_Starter_Kit/tree/Starter
