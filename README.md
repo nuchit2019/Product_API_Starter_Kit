@@ -17,7 +17,8 @@ Clean Architecture เป็นสถาปัตยกรรมการออ�
 * **Infrastructure:** ประกอบด้วยการ Implement Interfaces จาก Application Layer เช่น Repositories (การเชื่อมต่อ Database), Services ภายนอก
 * **Presentation (WebAPI):** ประกอบด้วย Controllers, DTOs (Data Transfer Objects) สำหรับรับส่งข้อมูล, และการตั้งค่า API
 
-image https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
+![image](https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg)
+https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 
 #### 1.2 SOLID Principles คืออะไร?
 SOLID เป็นหลักการ 5 ข้อในการออกแบบ Object-Oriented Programming เพื่อให้โค้ดมีความยืดหยุ่น เข้าใจง่าย และบำรุงรักษาง่าย:
