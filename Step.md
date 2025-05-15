@@ -355,6 +355,10 @@ public class ProductRepository : IProductRepository
     // ... (อื่น ๆ)
 }
 ```
+ *หลักการ SOLID:*
+    * **Single Responsibility Principle (SRP):** `ProductRepository` รับผิดชอบเฉพาะการเข้าถึงข้อมูล Product ใน Database.
+    * **Dependency Inversion Principle (DIP):** Implement `IProductRepository` ที่กำหนดโดย Application Layer.
+    
 
 **🧠 หลักการ:**
 
@@ -392,6 +396,14 @@ public class ProductsController : ControllerBase
 }
 ```
 
+*หลักการ Clean Code:*
+    * **Clear Naming:** ชื่อ Method และ Variable สื่อความหมาย.
+    * **Small Methods:** แต่ละ Action Method มีหน้าที่เดียว.
+    * **Comments:** อธิบายส่วนที่ซับซ้อน หรือการตัดสินใจในการออกแบบ.
+    * **Logging:** เพิ่ม Log เพื่อติดตามการทำงานและช่วยในการ Debug.
+    *หลักการ SOLID:*
+    * **Single Responsibility Principle (SRP):** Controller รับผิดชอบการจัดการ HTTP Request/Response และส่งต่อให้ Service Layer. ไม่ควรมี Business Logic ใน Controller.
+    
 **🧠 หลักการ:**
 
 * **D (Dependency Inversion)**: Controller ไม่ขึ้นกับ Implementation
