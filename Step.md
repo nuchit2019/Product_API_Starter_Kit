@@ -1,6 +1,6 @@
-เพื่อจัดทำ **คู่มือการเขียน Code ตามโครงสร้าง Project (ProductAPI.zip)** อย่างครบถ้วนโดยอิงหลัก **Clean Architecture**, **SOLID Principles** และแนวทาง **Clean Code**, ผมจะดำเนินการตามขั้นตอนต่อไปนี้:
+เพื่อจัดทำ **คู่มือการเขียน Code ตามโครงสร้าง Project: ProductAPI** โดยอิงหลัก **Clean Architecture**, **SOLID Principles** และแนวทาง **Clean Code**, ขั้นตอนต่อไปนี้:
 
----
+#
 
 ## 🛠️ คู่มือสร้างระบบ Product API ด้วย .NET 8 + Dapper + Clean Architecture
 
@@ -14,7 +14,7 @@
 * SOLID Principles
 * Middleware (Exception Handling, Logging, Response Wrapping)
 
----
+#
 
 ## 1️⃣ โครงสร้างโฟลเดอร์ (จาก Project แนบมา)
 
@@ -38,7 +38,7 @@ ProductAPI/
 └── ProductAPI.Tests             // (Optional) Unit Tests
 ```
 
----
+#
 
 ## 2️⃣ สร้าง Database และ Table
 
@@ -56,7 +56,7 @@ CREATE TABLE Products (
 );
 ```
 
----
+#
 
 ## 3️⃣ สร้าง Project แบบ Step-by-Step
 
@@ -85,7 +85,7 @@ dotnet sln add ./ProductAPI.Presentation.WebAPI
 * `Application` → Reference `Domain`, `Shared`
 * `Infrastructure` → Reference `Application`, `Domain`, `Shared`
 
----
+#
 
 ## 4️⃣ Step-by-Step การเขียน Code (พร้อมอธิบายหลัก SOLID และ Clean Code)
 
@@ -111,7 +111,7 @@ public class Product
 * **S (Single Responsibility)**: Entity นี้มีหน้าที่แทนข้อมูลเท่านั้น
 * Clean Code: ชื่อ class/field ชัดเจน, ใช้ type ที่เหมาะสม
 
----
+#
 
 ### ✅ 4.2 สร้าง DTO (Application Layer)
 
@@ -126,7 +126,7 @@ public record ProductDto(int Id, string Name, string? Description, decimal Price
 * **I (Interface Segregation)**: แยก DTO ไม่ให้ใช้ Entity ตรง ๆ
 * ใช้ `record` เพื่อความกระชับ, immutable
 
----
+#
 
 ### ✅ 4.3 สร้าง Interface + Service (Application Layer)
 
@@ -217,7 +217,7 @@ public class ProductRepository : IProductRepository
 * **S (Single Responsibility)**: จัดการเฉพาะ Data Access
 * Clean Code: ใช้ `const string`, ใช้ `using`
 
----
+#
 
 ### ✅ 4.5 Controller (API Layer)
 
@@ -253,7 +253,7 @@ public class ProductsController : ControllerBase
 * **D (Dependency Inversion)**: Controller ไม่ขึ้นกับ Implementation
 * Clean Code: Response เป็น `ApiResponse`, แยก logic ไป Service
 
----
+#
 
 ### ✅ 4.6 Middleware + ApiResponse (Shared)
 
@@ -300,7 +300,7 @@ public class ExceptionMiddleware
 }
 ```
 
----
+#
 
 ## 🔚 สรุปแนวทางและ SOLID
 
