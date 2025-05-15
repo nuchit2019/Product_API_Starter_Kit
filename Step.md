@@ -56,7 +56,7 @@ https://blog.byalex.dev/article/dapper-queries-synchronized-with-mssql-database-
 
 #
 
-## 1️⃣ โครงสร้างโฟลเดอร์ (จาก Project แนบมา)
+## 1️⃣ โครงสร้างโฟลเดอร์ Project
 
 ```plaintext
 ProductAPI/
