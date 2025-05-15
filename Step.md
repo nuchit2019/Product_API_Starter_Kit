@@ -18,24 +18,14 @@ Clean Architecture เป็นสถาปัตยกรรมการออ�
 https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 
 #### 1.2 SOLID Principles คืออะไร?
-* S - Single Responsibility Principle (SRP)
-* O - Open/Closed Principle (OCP)
-* L - Liskov Substitution Principle (LSP)
-* I - Interface Segregation Principle (ISP)
-* D - Dependency Inversion Principle (DIP)
 
 SOLID เป็นหลักการ 5 ข้อในการออกแบบ Object-Oriented Programming เพื่อให้โค้ดมีความยืดหยุ่น เข้าใจง่าย และบำรุงรักษาง่าย:
-* **S - Single Responsibility Principle (SRP)
--     ** Class หนึ่งควรมีหน้าที่รับผิดชอบเพียงอย่างเดียว
-* **O - Open/Closed Principle (OCP)
--     ** Software entities (classes, modules, functions, etc.) ควรจะเปิดสำหรับการขยาย (extension) แต่ปิดสำหรับการแก้ไข (modification)
-* **L - Liskov Substitution Principle (LSP):
--     ** Objects ของ Superclass ควรจะสามารถแทนที่ด้วย Objects ของ Subclass ได้โดยไม่กระทบการทำงานของโปรแกรม
-* **I - Interface Segregation Principle (ISP)
--     ** Client ไม่ควรถูกบังคับให้ implement interface ที่ไม่ได้ใช้งาน
-* **D - Dependency Inversion Principle (DIP)
--     ** High-level modules ไม่ควรขึ้นกับ Low-level modules แต่ทั้งคู่ควรขึ้นกับ Abstractions (Interfaces)
-
+* S - Single Responsibility Principle (SRP): Class หนึ่งควรมีหน้าที่รับผิดชอบเพียงอย่างเดียว
+* O - Open/Closed Principle (OCP): ควรจะเปิดสำหรับการขยาย (extension) แต่ปิดสำหรับการแก้ไข (modification)
+* L - Liskov Substitution Principle (LSP): Objects ของ Superclass ควรจะสามารถแทนที่ด้วย Objects ของ Subclass ได้โดยไม่กระทบการทำงานของโปรแกรม
+* I - Interface Segregation Principle (ISP): Client ไม่ควรถูกบังคับให้ implement interface ที่ไม่ได้ใช้งาน
+* D - Dependency Inversion Principle (DIP): High-level modules ไม่ควรขึ้นกับ Low-level modules แต่ทั้งคู่ควรขึ้นกับ Abstractions (Interfaces)
+ 
 ![image](https://github.com/user-attachments/assets/4e4a02da-8d36-4503-8c7c-4e4665cd718a)
 
 #### 1.3 record  คืออะไร?
