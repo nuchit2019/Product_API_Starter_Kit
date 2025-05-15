@@ -59,7 +59,8 @@ https://blog.byalex.dev/article/dapper-queries-synchronized-with-mssql-database-
 1.  เปิด Visual Studio.
 2.  เลือก **Create a new project**.
 3.  ค้นหา "Blank Solution" และตั้งชื่อ Solution เช่น `ProductManagement` จากนั้นคลิก **Create**.
-    [Image of Visual Studio Create Blank Solution]
+   ![image](https://github.com/user-attachments/assets/168560fd-ab89-49cc-b030-6f595a1e3339)
+
 
 4.  **สร้าง Project Core.Domain:**
     * ใน Solution Explorer, คลิกขวาที่ Solution `ProductManagement` -> **Add** -> **New Project...**.
