@@ -179,7 +179,7 @@ public class Product
 ```
 *หมายเหตุ:* การใช้ `string.Empty` และ `?` (nullable reference types) ช่วยในการจัดการ Nullability ใน C# 8.0+
 
-**🧠 หลักการ:**
+**🧠 SOLID Principles:**
 
 * **S (Single Responsibility)**: Entity นี้มีหน้าที่แทนข้อมูลเท่านั้น
 * Clean Code: ชื่อ class/field ชัดเจน, ใช้ type ที่เหมาะสม
@@ -214,7 +214,7 @@ namespace ProductAPI.Application.DTOs
 ```
 
 
-**🧠 หลักการ:**
+**🧠 SOLID Principles:**
 
 * **I (Interface Segregation)**: แยก DTO ไม่ให้ใช้ Entity ตรง ๆ
 * ใช้ `record` เพื่อความกระชับ, immutable
@@ -327,7 +327,7 @@ namespace ProductAPI.Application.Services
     * **Open/Closed Principle (OCP):** ถ้าต้องการเพิ่ม Feature ใหม่ๆ เช่น การคำนวณส่วนลด ก็สามารถทำได้โดยการสร้าง Method ใหม่ หรือ Service ใหม่ โดยไม่กระทบ Method เดิม.
 #
 
-**🧠 หลักการ:**
+**🧠 SOLID Principles:**
 
 * **D (Dependency Inversion)**: ใช้ Interface แทนการผูกตรง
 * **O (Open/Closed)**: แก้ Service ได้โดยไม่กระทบ Layer อื่น
@@ -415,15 +415,10 @@ namespace ProductAPI.Infrastructure.Repositories
 }
 
 ```
-**🧠 หลักการ:**
-
- *หลักการ SOLID:*
+**🧠 SOLID Principles:**
  
-    * **Single Responsibility Principle (SRP):** `ProductRepository` รับผิดชอบเฉพาะการเข้าถึงข้อมูล Product ใน Database จัดการเฉพาะ Data Access.
-    * **Dependency Inversion Principle (DIP):** Implement `IProductRepository` ที่กำหนดโดย Application Layer.
-    
- 
-
+ * **Single Responsibility Principle (SRP):** `ProductRepository` รับผิดชอบเฉพาะการเข้าถึงข้อมูล Product ใน Database จัดการเฉพาะ Data Access.
+ * **Dependency Inversion Principle (DIP):** Implement `IProductRepository` ที่กำหนดโดย Application Layer.
 #
 
 ### ✅ 4.5 Controller (API Layer)
@@ -536,7 +531,7 @@ namespace ProductAPI.Controllers
     *หลักการ SOLID:*
     * **Single Responsibility Principle (SRP):** Controller รับผิดชอบการจัดการ HTTP Request/Response และส่งต่อให้ Service Layer. ไม่ควรมี Business Logic ใน Controller.
     
-**🧠 หลักการ:**
+**🧠 SOLID Principles:**
 
 * **D (Dependency Inversion)**: Controller ไม่ขึ้นกับ Implementation
 * Clean Code: Response เป็น `ApiResponse`, แยก logic ไป Service
