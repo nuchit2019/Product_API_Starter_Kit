@@ -98,23 +98,19 @@ https://blog.byalex.dev/article/dapper-queries-synchronized-with-mssql-database-
 ## 1️⃣ โครงสร้างโฟลเดอร์ Project
 
 ```plaintext
-ProductAPI/
-│
+ProductAPI/│
 ├── Application        // Business Logic
 │   ├── DTOs/
 │   ├── Interfaces/
-│   └── Services/
+│   └── Services/│
+├── Domain                // Entity (Business Model)│
+├── Infrastructure        // Data Access (Repositories, Dapper)
 │
-├── Domain            // Entity (Business Model)
-│
-├── Infrastructure    // Data Access (Repositories, Dapper)
-│
-├── Presentation.WebAPI  // API Layer
+├── Presentation.WebAPI    // API Layer
 │   └── Controllers/
+├── Common                // Shared Models (ApiResponse, Enums, Exceptions)
 │
-├── Common            // Shared Models (ApiResponse, Enums, Exceptions)
-│
-└── ProductAPI.Tests             // (Optional) Unit Tests
+└── ProductAPI.Tests        // (Optional) Unit Tests
 ```
 
 #
