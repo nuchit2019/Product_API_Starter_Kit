@@ -312,8 +312,4 @@ public class ExceptionMiddleware
 | **I**   | ไม่ยัด method ที่ไม่จำเป็นใน Interface                          |
 | **D**   | Controller ไม่ขึ้นตรงกับ Implementation (ใช้ DI)                |
 
----
-
-## 📌 ถ้าต้องการให้จัดทำ PDF หรือ PowerPoint สำหรับนำเสนอโครงสร้างนี้ต่อทีม สามารถแจ้งได้ครับ
-
-หากคุณต้องการให้ผม generate ไฟล์ README.md หรือเขียนเพิ่มเติมลงในเอกสารที่แนบมา ก็แจ้งได้เช่นกันครับ ✅
+#✅
