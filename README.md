@@ -40,6 +40,8 @@ Dapper เป็น Micro ORM (Object-Relational Mapper) สำหรับ .NET
 3.  **SQL Server LocalDB** (มักจะติดตั้งมาพร้อมกับ Visual Studio)
 4.  **Postman** หรือเครื่องมืออื่นสำหรับทดสอบ API
 
+![image](https://github.com/user-attachments/assets/9b9a7864-5b92-4450-b2a0-292bcea74210)
+
 ### 2. การสร้างโปรเจกต์ (Project Creation)
 
 เราจะสร้าง Solution และแบ่งออกเป็น 4 Projects ตามหลัก Clean Architecture:
