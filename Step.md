@@ -415,15 +415,14 @@ namespace ProductAPI.Infrastructure.Repositories
 }
 
 ```
- *หลักการ SOLID:*
-    * **Single Responsibility Principle (SRP):** `ProductRepository` รับผิดชอบเฉพาะการเข้าถึงข้อมูล Product ใน Database.
-    * **Dependency Inversion Principle (DIP):** Implement `IProductRepository` ที่กำหนดโดย Application Layer.
-    
-
 **🧠 หลักการ:**
 
-* **S (Single Responsibility)**: จัดการเฉพาะ Data Access
-* Clean Code: ใช้ `const string`, ใช้ `using`
+ *หลักการ SOLID:*
+ 
+    * **Single Responsibility Principle (SRP):** `ProductRepository` รับผิดชอบเฉพาะการเข้าถึงข้อมูล Product ใน Database จัดการเฉพาะ Data Access.
+    * **Dependency Inversion Principle (DIP):** Implement `IProductRepository` ที่กำหนดโดย Application Layer.
+    
+ 
 
 #
 
