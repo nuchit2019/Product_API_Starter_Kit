@@ -132,6 +132,9 @@ ProductManagement (Solution)
     [Image of SSMS Table Designer for Products]
 7.  กด Ctrl + S เพื่อ Save Table, ตั้งชื่อว่า `Products`.
 
+
+![image](https://github.com/user-attachments/assets/da9eef20-689a-47a3-ab2a-990c78d5fd1b)
+
 หรือใช้ SQL Script สร้างตาราง:
 ```sql
 USE ProductDb;
@@ -149,6 +152,7 @@ CREATE TABLE Products (
 GO
 ```
 รัน Script นี้ใน New Query window ของ `ProductDb`.
+
 
 ### 4. พัฒนาแต่ละ Layer
 
