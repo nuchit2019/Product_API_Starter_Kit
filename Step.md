@@ -319,7 +319,7 @@ namespace ProductAPI.Application.Services
         }
     }
 }
-    ```
+```
     *หลักการ SOLID:*
     * **Single Responsibility Principle (SRP):** `ProductService` รับผิดชอบเฉพาะ Business Logic ที่เกี่ยวกับ Product และการประสานงานกับ Repository.
     * **Open/Closed Principle (OCP):** ถ้าต้องการเพิ่ม Feature ใหม่ๆ เช่น การคำนวณส่วนลด ก็สามารถทำได้โดยการสร้าง Method ใหม่ หรือ Service ใหม่ โดยไม่กระทบ Method เดิม.
@@ -331,7 +331,7 @@ namespace ProductAPI.Application.Services
 * **O (Open/Closed)**: แก้ Service ได้โดยไม่กระทบ Layer อื่น
 * Clean Code: Function name ชัดเจน, ใช้ LINQ แปลงข้อมูล
 
----
+#
 
 ### ✅ 4.4 สร้าง Repository (Infrastructure Layer)
 
@@ -411,7 +411,6 @@ namespace ProductAPI.Infrastructure.Repositories
         }
     }
 }
-
 
 ```
  *หลักการ SOLID:*
@@ -564,7 +563,6 @@ namespace ProductAPI.Common
 
 ```csharp
 
-
 namespace ProductAPI.Middleware
 {
     public class ExceptionMiddleware
@@ -655,8 +653,7 @@ namespace ProductAPI.Middleware
         }
 
     }
-}
- 
+} 
 
 ```
 
