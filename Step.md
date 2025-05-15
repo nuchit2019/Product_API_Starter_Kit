@@ -510,4 +510,4 @@ public class ExceptionMiddleware
 | C# 10.0           | ✅ .NET 6.0 (Nov 2021)     |
 | C# 11.0           | ✅ .NET 7.0 (Nov 2022)     |
 | C# 12.0           | ✅ .NET 8.0 (Nov 2023)     |
-| C# 13.0 (Preview) | 🔜 .NET 9.0 (ปลายปี 2024) |
+| C# 13.0           | ✅ .NET 9.0 (Nov 2024)     |
