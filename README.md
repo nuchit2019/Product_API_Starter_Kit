@@ -1,7 +1,8 @@
 **`CRUD Product API Starter Kit`** สำหรับนักพัฒนาใหม่ที่เข้ามาใช้งานหรือพัฒนาโปรเจกต์นี้ต่อ โดยเน้นอธิบายโครงสร้าง Clean Architecture,Clean Code, SOLID Principles, วิธีรัน, และ Best Practices ที่ใช้:
 
-Branch: Starter คุณควรเริ่มที่นี่
-Branch: Final ถ้าคุณติดปัญหา... ดูตัวอย่างที่นี่
+### Branch: Starter คุณควรเริ่มที่นี่
+
+### Branch: Final ถ้าคุณติดปัญหา... ดูตัวอย่างที่นี่
 
 #
 
