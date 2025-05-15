@@ -122,7 +122,7 @@ ProductAPI/
 │       └── ProductRepository.cs
 ├── Middleware/
 │   ├── ExceptionMiddleware.cs
-│   └── ResponseWrappingMiddleware.cs
+│   └── TODO...Middleware.cs
 ├── Common/
 │   ├── ApiResponse.cs
 └── Logs/
