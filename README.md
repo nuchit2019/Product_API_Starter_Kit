@@ -78,6 +78,7 @@ https://blog.byalex.dev/article/dapper-queries-synchronized-with-mssql-database-
     * เพิ่ม Reference ให้ `Core.Application` อ้างอิงไปยัง `Core.Domain`:
         * คลิกขวาที่ `Core.Application` -> **Add** -> **Project Reference...**.
         * เลือก `ProductManagement.Core.Domain` และคลิก **OK**.
+          (ขั้นตอนตามรูป ข้อ4.สร้าง Project Core.Domain)
 
 6.  **สร้าง Project Infrastructure.Persistence:**
     * คลิกขวาที่ Solution -> **Add** -> **New Project...**.
@@ -87,6 +88,7 @@ https://blog.byalex.dev/article/dapper-queries-synchronized-with-mssql-database-
     * เพิ่ม Reference ให้ `Infrastructure.Persistence` อ้างอิงไปยัง `Core.Application`:
         * คลิกขวาที่ `Infrastructure.Persistence` -> **Add** -> **Project Reference...**.
         * เลือก `ProductManagement.Core.Application` และคลิก **OK**.
+          (ขั้นตอนตามรูป ข้อ4.สร้าง Project Core.Domain)
 
 7.  **สร้าง Project Presentation.WebAPI:**
     * คลิกขวาที่ Solution -> **Add** -> **New Project...**.
@@ -97,6 +99,9 @@ https://blog.byalex.dev/article/dapper-queries-synchronized-with-mssql-database-
     * เพิ่ม Reference ให้ `Presentation.WebAPI` อ้างอิงไปยัง `Core.Application` และ `Infrastructure.Persistence`:
         * คลิกขวาที่ `Presentation.WebAPI` -> **Add** -> **Project Reference...**.
         * เลือก `ProductManagement.Core.Application` และ `ProductManagement.Infrastructure.Persistence` และคลิก **OK**.
+           (ขั้นตอนตามรูป ข้อ4.สร้าง Project Core.Domain) แต่ Project Type เปลี่ยนเป็น `ASP.NET Core Web API`
+          ![image](https://github.com/user-attachments/assets/c996c473-7703-4786-9dc3-28270261d3c3)
+
 
 ตอนนี้คุณควรจะมีโครงสร้างโปรเจกต์ดังนี้:
 ```
