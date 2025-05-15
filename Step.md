@@ -143,6 +143,7 @@ public class Product
     public DateTime? UpdatedAt { get; set; }
 }
 ```
+*หมายเหตุ:* การใช้ `string.Empty` และ `?` (nullable reference types) ช่วยในการจัดการ Nullability ใน C# 8.0+
 
 **🧠 หลักการ:**
 
@@ -184,23 +185,128 @@ public interface IProductService
 📁 `Services/ProductService.cs`
 
 ```csharp
-public class ProductService : IProductService
-{
-    private readonly IProductRepository _repository;
 
-    public ProductService(IProductRepository repository)
+ // File: ProductManagement.Core.Application/Features/Products/Services/ProductService.cs
+    using ProductManagement.Core.Application.Contracts.Persistence;
+    using ProductManagement.Core.Application.Contracts.Services;
+    using ProductManagement.Core.Application.DTOs.Product;
+    using ProductManagement.Core.Domain; // ต้อง using Domain entity
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System; // สำหรับ DateTime.UtcNow
+
+    namespace ProductManagement.Core.Application.Features.Products.Services
     {
-        _repository = repository;
+        public class ProductService : IProductService
+        {
+            private readonly IProductRepository _productRepository;
+            // อาจจะมี ILogger, IMapper (AutoMapper) หรือ Services อื่นๆ ถูก inject เข้ามาได้
+
+            public ProductService(IProductRepository productRepository)
+            {
+                _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
+            }
+
+            public async Task<ProductDto?> GetProductByIdAsync(int id)
+            {
+                var product = await _productRepository.GetByIdAsync(id);
+                if (product == null) return null;
+
+                // Manual Mapping (หรือใช้ AutoMapper)
+                return new ProductDto
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    Price = product.Price,
+                    Stock = product.Stock,
+                    CreatedAt = product.CreatedAt,
+                    UpdatedAt = product.UpdatedAt
+                };
+            }
+
+            public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
+            {
+                var products = await _productRepository.GetAllAsync();
+                var productDtos = new List<ProductDto>();
+                foreach (var product in products)
+                {
+                    productDtos.Add(new ProductDto
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Description = product.Description,
+                        Price = product.Price,
+                        Stock = product.Stock,
+                        CreatedAt = product.CreatedAt,
+                        UpdatedAt = product.UpdatedAt
+                    });
+                }
+                return productDtos;
+            }
+
+            public async Task<ProductDto> CreateProductAsync(CreateProductDto createProductDto)
+            {
+                // Validation เพิ่มเติมสามารถทำได้ที่นี่ (Business Logic)
+                // เช่น ตรวจสอบว่าชื่อ Product ซ้ำหรือไม่ (ถ้าต้องการ)
+
+                var product = new Product
+                {
+                    Name = createProductDto.Name,
+                    Description = createProductDto.Description,
+                    Price = createProductDto.Price,
+                    Stock = createProductDto.Stock,
+                    CreatedAt = DateTime.UtcNow // ใช้ UTC เพื่อความเป็นสากล
+                };
+
+                var newProduct = await _productRepository.AddAsync(product);
+
+                return new ProductDto // คืนค่าเป็น DTO
+                {
+                    Id = newProduct.Id,
+                    Name = newProduct.Name,
+                    Description = newProduct.Description,
+                    Price = newProduct.Price,
+                    Stock = newProduct.Stock,
+                    CreatedAt = newProduct.CreatedAt
+                };
+            }
+
+            public async Task<bool> UpdateProductAsync(UpdateProductDto updateProductDto)
+            {
+                var existingProduct = await _productRepository.GetByIdAsync(updateProductDto.Id);
+                if (existingProduct == null)
+                {
+                    // หรือจะ throw new NotFoundException("Product not found"); ก็ได้
+                    return false;
+                }
+
+                // Update fields if new value is provided
+                existingProduct.Name = updateProductDto.Name ?? existingProduct.Name;
+                existingProduct.Description = updateProductDto.Description ?? existingProduct.Description;
+                existingProduct.Price = updateProductDto.Price ?? existingProduct.Price;
+                existingProduct.Stock = updateProductDto.Stock ?? existingProduct.Stock;
+                existingProduct.UpdatedAt = DateTime.UtcNow;
+
+                return await _productRepository.UpdateAsync(existingProduct);
+            }
+
+            public async Task<bool> DeleteProductAsync(int id)
+            {
+                var productToDelete = await _productRepository.GetByIdAsync(id);
+                if (productToDelete == null)
+                {
+                    return false; // ไม่พบ Product ที่จะลบ
+                }
+                return await _productRepository.DeleteAsync(id);
+            }
+        }
     }
-
-    // ใช้หลัก Clean Code และ DRY Principle
-    public async Task<IEnumerable<ProductDto>> GetAllAsync()
-        => (await _repository.GetAllAsync())
-           .Select(p => new ProductDto(p.Id, p.Name, p.Description, p.Price, p.Stock));
-
-    // ... (อื่น ๆ คล้ายกัน)
-}
-```
+    ```
+    *หลักการ SOLID:*
+    * **Single Responsibility Principle (SRP):** `ProductService` รับผิดชอบเฉพาะ Business Logic ที่เกี่ยวกับ Product และการประสานงานกับ Repository.
+    * **Open/Closed Principle (OCP):** ถ้าต้องการเพิ่ม Feature ใหม่ๆ เช่น การคำนวณส่วนลด ก็สามารถทำได้โดยการสร้าง Method ใหม่ หรือ Service ใหม่ โดยไม่กระทบ Method เดิม.
+#
 
 **🧠 หลักการ:**
 
