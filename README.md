@@ -1,4 +1,4 @@
-# **`CRUD Product API Starter Kit`** สำหรับนักพัฒนาใหม่(New Back-end development (Dev Back-end)) สำหรับฝึกฝีมือ... โปรเจกต์นี้...เน้นอธิบายโครงสร้าง Clean Architecture,Clean Code, SOLID Principles, วิธีรัน, และ Best Practices ที่จะทำให้คุณเป็น มืออาชีพ ในเวลาอันสั้น:
+# **`CRUD Product API Starter Kit`** สำหรับนักพัฒนาใหม่(New Back-end development (Dev Back-end)) สำหรับฝึกฝีมือ... โปรเจกต์นี้...เน้นอธิบายโครงสร้าง Clean Architecture,Clean Code, SOLID Principles, วิธีรัน, และ Best Practices ที่จะทำให้คุณเป็น มืออาชีพ ในเร็ววัน ช้า หรือ เร็ว ขึ้นอยู่กับ การซ้อม...และซ้อม...:
 
 ### Branch: Starter คุณควรเริ่มที่นี่:
 https://github.com/nuchit2019/Product_API_Starter_Kit/tree/Starter
