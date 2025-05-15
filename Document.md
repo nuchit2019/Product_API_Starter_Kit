@@ -125,7 +125,6 @@ ProductAPI/
 │   └── ResponseWrappingMiddleware.cs
 ├── Common/
 │   ├── ApiResponse.cs
-│   └── CustomExceptions.cs
 └── Logs/
     └── log-*.txt
 ```
