@@ -95,19 +95,19 @@ https://blog.byalex.dev/article/dapper-queries-synchronized-with-mssql-database-
 ```plaintext
 ProductAPI/
 │
-├── ProductAPI.Application        // Business Logic
+├── Application        // Business Logic
 │   ├── DTOs/
 │   ├── Interfaces/
 │   └── Services/
 │
-├── ProductAPI.Domain            // Entity (Business Model)
+├── Domain            // Entity (Business Model)
 │
-├── ProductAPI.Infrastructure    // Data Access (Repositories, Dapper)
+├── Infrastructure    // Data Access (Repositories, Dapper)
 │
-├── ProductAPI.Presentation.WebAPI  // API Layer
+├── Presentation.WebAPI  // API Layer
 │   └── Controllers/
 │
-├── ProductAPI.Shared            // Shared Models (ApiResponse, Enums, Exceptions)
+├── Common            // Shared Models (ApiResponse, Enums, Exceptions)
 │
 └── ProductAPI.Tests             // (Optional) Unit Tests
 ```
@@ -163,7 +163,7 @@ ProductAPI/
 
 ### ✅ 4.1 สร้าง Entity (Domain Layer)
 
-📁 `ProductAPI.Domain/Entities/Product.cs`
+📁 `Domain/Entities/Product.cs`
 
 ```csharp
 public class Product
@@ -188,11 +188,31 @@ public class Product
 
 ### ✅ 4.2 สร้าง DTO (Application Layer)
 
-📁 `ProductAPI.Application/DTOs/ProductDto.cs`
+📁 `Application/DTOs/ProductCreateDTO.cs`
 
 ```csharp
-public record ProductDto(int Id, string Name, string? Description, decimal Price, int Stock);
+namespace ProductAPI.Application.DTOs
+{
+    public record ProductCreateDTO(string Name, string Description, decimal Price, int Stock);
+}
 ```
+📁 `Application/DTOs/ProductResponseDTO.cs`
+
+```csharp
+namespace ProductAPI.Application.DTOs
+{
+    public record ProductResponseDTO(int Id, string Name, string Description, decimal Price, int Stock);
+}
+```
+📁 `Application/DTOs/ProductUpdateDTO.cs`
+
+```csharp
+namespace ProductAPI.Application.DTOs
+{
+    public record ProductUpdateDTO(int Id, string Name, string Description, decimal Price, int Stock);
+}
+```
+
 
 **🧠 หลักการ:**
 
@@ -203,16 +223,19 @@ public record ProductDto(int Id, string Name, string? Description, decimal Price
 
 ### ✅ 4.3 สร้าง Interface + Service (Application Layer)
 
-📁 `Interfaces/IProductService.cs`
+📁 `Application/Interfaces/IProductService.cs`
 
 ```csharp
-public interface IProductService
+namespace ProductAPI.Application.Interfaces
 {
-    Task<IEnumerable<ProductDto>> GetAllAsync();
-    Task<ProductDto?> GetByIdAsync(int id);
-    Task<ProductDto> CreateAsync(ProductDto product);
-    Task<bool> UpdateAsync(int id, ProductDto product);
-    Task<bool> DeleteAsync(int id);
+    public interface IProductService
+    {
+        Task<IEnumerable<ProductResponseDTO>> GetAllAsync();
+        Task<ProductResponseDTO?> GetByIdAsync(int id);
+        Task<ProductResponseDTO> CreateAsync(ProductCreateDTO productDto);
+        Task<bool> UpdateAsync(ProductUpdateDTO productDto);
+        Task<bool> DeleteAsync(int id);
+    }
 }
 ```
 
@@ -312,42 +335,84 @@ namespace ProductAPI.Application.Services
 
 ### ✅ 4.4 สร้าง Repository (Infrastructure Layer)
 
-📁 `Interfaces/IProductRepository.cs`
+📁 `Domain/Interfaces/IProductRepository.cs`
 
 ```csharp
 public interface IProductRepository
 {
     Task<IEnumerable<Product>> GetAllAsync();
     Task<Product?> GetByIdAsync(int id);
-    Task<Product> CreateAsync(Product product);
+    Task<int> CreateAsync(Product product);
     Task<bool> UpdateAsync(Product product);
     Task<bool> DeleteAsync(int id);
 }
 ```
 
-📁 `Repositories/ProductRepository.cs`
+📁 `Infrastructure/Repositories/ProductRepository.cs`
 
 ```csharp
-public class ProductRepository : IProductRepository
+
+namespace ProductAPI.Infrastructure.Repositories
 {
-    private readonly IConfiguration _config;
-    private readonly string _connectionString;
-
-    public ProductRepository(IConfiguration config)
+    public class ProductRepository : IProductRepository
     {
-        _config = config;
-        _connectionString = _config.GetConnectionString("DefaultConnection")!;
-    }
+        private readonly string _connectionString; 
 
-    public async Task<IEnumerable<Product>> GetAllAsync()
-    {
-        const string query = "SELECT * FROM Products";
-        using var conn = new SqlConnection(_connectionString);
-        return await conn.QueryAsync<Product>(query);
-    }
+        public ProductRepository(IConfiguration configuration)
+        {
+            _connectionString = configuration.GetConnectionString("DefaultConnection")
+                ?? throw new ArgumentNullException(nameof(configuration), "Connection string 'DefaultConnection' not found.");
+        }
 
-    // ... (อื่น ๆ)
+
+        public async Task<IEnumerable<Product>> GetAllAsync()
+        {
+             //throw new Exception("Test Exception ** ProductRepository. GetAllAsync() **"); 
+            
+            using IDbConnection db = new SqlConnection(_connectionString);
+            return await db.QueryAsync<Product>("SELECT * FROM Product2");
+        }
+
+        public async Task<Product?> GetByIdAsync(int id)
+        {
+            using IDbConnection db = new SqlConnection(_connectionString);
+            return await db.QueryFirstOrDefaultAsync<Product>(
+                "SELECT * FROM Product2 WHERE Id = @Id", new { Id = id });
+        }
+
+        public async Task<int> CreateAsync(Product product)
+        {
+            using IDbConnection db = new SqlConnection(_connectionString);
+            var sql = @"INSERT INTO Product2 (Name, Description, Price, Stock) 
+                    VALUES (@Name, @Description, @Price, @Stock);
+                    SELECT CAST(SCOPE_IDENTITY() as int)";
+            return await db.QuerySingleAsync<int>(sql, product);
+        }
+
+        public async Task<bool> UpdateAsync(Product product)
+        {
+            using IDbConnection db = new SqlConnection(_connectionString);
+            var sql = @"UPDATE Product2 SET 
+                    Name = @Name, 
+                    Description = @Description, 
+                    Price = @Price, 
+                    Stock = @Stock 
+                    WHERE Id = @Id";
+            var affected = await db.ExecuteAsync(sql, product);
+            return affected > 0;
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            using IDbConnection db = new SqlConnection(_connectionString);
+            var affected = await db.ExecuteAsync(
+                "DELETE FROM Product2 WHERE Id = @Id", new { Id = id });
+            return affected > 0;
+        }
+    }
 }
+
+
 ```
  *หลักการ SOLID:*
     * **Single Responsibility Principle (SRP):** `ProductRepository` รับผิดชอบเฉพาะการเข้าถึงข้อมูล Product ใน Database.
@@ -366,28 +431,101 @@ public class ProductRepository : IProductRepository
 📁 `Controllers/ProductsController.cs`
 
 ```csharp
-[ApiController]
-[Route("api/[controller]")]
-public class ProductsController : ControllerBase
+
+namespace ProductAPI.Controllers
 {
-    private readonly IProductService _service;
-    private readonly ILogger<ProductsController> _logger;
-
-    public ProductsController(IProductService service, ILogger<ProductsController> logger)
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ProductsController : ControllerBase
     {
-        _service = service;
-        _logger = logger;
-    }
+        private readonly IProductService _productService;
+        private readonly ILogger<ProductsController> _logger;
 
-    [HttpGet]
-    public async Task<IActionResult> Get()
-    {
-        var result = await _service.GetAllAsync();
-        return Ok(ApiResponse.Success(result));
-    }
+        public ProductsController(ILogger<ProductsController> logger ,IProductService productService)
+        {
+            _productService = productService;
+            _logger = logger;
+        }
 
-    // ... POST, PUT, DELETE
+        [HttpGet] 
+        public async Task<ActionResult<IEnumerable<ProductResponseDTO>>> GetAllProducts()
+        { 
+            try
+            {
+                var products = await _productService.GetAllAsync();
+
+                var response = ApiResponse<IEnumerable<ProductResponseDTO>>.SuccessResponse(
+                    data: products,
+                    message: "Products retrieved successfully",
+                    statusCode: StatusCodes.Status200OK
+                );
+
+                //throw new Exception("Test Exception GetAllProducts---------------");
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred in GetAllProducts");
+                var errorResponse = ApiResponse<object>.FailResponse(
+                    message: "An unexpected error occurred while fetching products.",
+                    statusCode: StatusCodes.Status500InternalServerError,
+                    error: ex.Message // หรือจะรวมกับ StackTrace ก็ได้
+                );
+
+                return StatusCode(StatusCodes.Status500InternalServerError, errorResponse);
+            }
+
+        }
+
+        //[HttpGet("api/Products2")]
+        //public async Task<ActionResult<ApiResponse<IEnumerable<ProductResponseDTO>>>> Get()
+        //{
+        //    var products = await _productService.GetAllAsync();          
+        //    return Ok(ApiResponse<IEnumerable<ProductResponseDTO>>.SuccessResponse(products));
+        //}
+
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ApiResponse<ProductResponseDTO>>> Get(int id)
+        {
+            var product = await _productService.GetByIdAsync(id);
+            return product != null
+                ? Ok(ApiResponse<ProductResponseDTO>.SuccessResponse(product))
+                : NotFound(ApiResponse<ProductResponseDTO>.FailResponse("Product not found", 404));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<ApiResponse<ProductResponseDTO>>> Post([FromBody] ProductCreateDTO dto)
+        {
+            var product = await _productService.CreateAsync(dto);
+
+            //throw new Exception("Test Exception CreatedAtAction -----------------------");
+            return CreatedAtAction(nameof(Get), new { id = product.Id },  ApiResponse<ProductResponseDTO>.SuccessResponse(product, "Product created", 201));
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ApiResponse<object>>> Put(int id, [FromBody] ProductUpdateDTO dto)
+        {
+            if (id != dto.Id)
+                return BadRequest(ApiResponse<object>.FailResponse("Invalid product ID", 400));
+
+            var result = await _productService.UpdateAsync(dto);
+            return result
+                ? Ok(ApiResponse<object>.SuccessResponse(null, "Product updated"))
+                : NotFound(ApiResponse<object>.FailResponse("Product not found", 404));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ApiResponse<object>>> Delete(int id)
+        {
+            var result = await _productService.DeleteAsync(id);
+            return result
+                ? Ok(ApiResponse<object>.SuccessResponse(null, "Product deleted"))
+                : NotFound(ApiResponse<object>.FailResponse("Product not found", 404));
+        }
+    }
 }
+
 ```
 
 *หลักการ Clean Code:*
@@ -407,46 +545,193 @@ public class ProductsController : ControllerBase
 
 ### ✅ 4.6 Middleware + ApiResponse (Shared)
 
-📁 `Shared/ApiResponse.cs`
+📁 `Common/ApiResponse.cs`
 
 ```csharp
-public class ApiResponse<T>
+namespace ProductAPI.Common
 {
-    public bool Success { get; set; }
-    public string? Message { get; set; }
-    public T? Data { get; set; }
+    public record ApiResponse<T>(int StatusCode, bool Success, string Message, T? Data, string? Error = null)
+    {
+        public static ApiResponse<T> SuccessResponse(T data, string message = "Success", int statusCode = 200) => new(statusCode, true, message, data);
 
-    public static ApiResponse<T> Success(T data) => new() { Success = true, Data = data };
+        public static ApiResponse<T> FailResponse(string message = "Failed", int statusCode = 400, string? error = null) => new(statusCode, false, message, default, error);
+    }
+
 }
 ```
 
 📁 `Middleware/ExceptionMiddleware.cs`
 
 ```csharp
-public class ExceptionMiddleware
+
+
+namespace ProductAPI.Middleware
 {
-    private readonly RequestDelegate _next;
-    private readonly ILogger<ExceptionMiddleware> _logger;
-
-    public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
+    public class ExceptionMiddleware
     {
-        _next = next;
-        _logger = logger;
-    }
+        private readonly RequestDelegate _next;
+        private readonly ILogger<ExceptionMiddleware> _logger;
 
-    public async Task InvokeAsync(HttpContext context)
-    {
-        try
+        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
         {
-            await _next(context);
+            _next = next;
+            _logger = logger;
         }
-        catch (Exception ex)
+
+        public async Task InvokeAsync(HttpContext context)
         {
-            _logger.LogError(ex, ex.Message);
-            context.Response.StatusCode = 500;
-            await context.Response.WriteAsJsonAsync(ApiResponse<string>.Fail("Internal Server Error"));
+            try
+            {
+                context.Request.EnableBuffering();
+                await _next(context);
+            }
+            catch (Exception ex)
+            {
+                // Get Action Name from endpoint
+                var endpoint = context.GetEndpoint();
+                var actionName = endpoint?.DisplayName ?? "UnknownAction";
+
+                // Read Request Body
+                var requestBody = await ReadRequestBodyAsync(context.Request);
+
+                // StackTrace
+                var st = new StackTrace(ex, true);
+                var frame = st.GetFrames()?.FirstOrDefault(f => f.GetFileLineNumber() > 0);
+                var methodInfo = frame?.GetMethod();
+                var declaringType = methodInfo?.DeclaringType;
+
+                // Extract original method name (handle async state machine)
+                var originalMethodName = declaringType?.Name;
+                string methodName;
+                if (!string.IsNullOrWhiteSpace(originalMethodName) && originalMethodName.Contains("<") && originalMethodName.Contains(">"))
+                {
+                    var start = originalMethodName.IndexOf("<") + 1;
+                    var end = originalMethodName.IndexOf(">");
+                    methodName = originalMethodName.Substring(start, end - start);
+                }
+                else
+                {
+                    methodName = methodInfo?.Name ?? "UnknownMethod";
+                }
+
+                // Get class name (real class, not compiler generated)
+                var className = declaringType?.DeclaringType?.Name ?? declaringType?.Name ?? "UnknownClass";
+                var lineNumber = frame?.GetFileLineNumber();
+
+                // Compose Error Detail
+                var errorDetail = $"Class: {className}, Method: {methodName}, Line: {lineNumber}, Action: {actionName}, Request: {requestBody}";
+
+                // Log
+                _logger.LogError(ex, "Exception occurred: {ErrorDetail}", errorDetail);
+
+                // Return API JSON Response
+
+                context.Items["ExceptionHandled"] = true;
+
+                context.Response.ContentType = "application/json";
+                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+
+                var response = ApiResponse<object>.FailResponse("Internal Server Error", 500, errorDetail);               
+
+                var json = JsonSerializer.Serialize(response);
+                await context.Response.WriteAsync(json);
+            }
         }
+
+        private async Task<string> ReadRequestBodyAsync(HttpRequest request)
+        {
+            try
+            {
+                request.Body.Position = 0;
+                using var reader = new StreamReader(request.Body, Encoding.UTF8, leaveOpen: true);
+                var body = await reader.ReadToEndAsync();
+                request.Body.Position = 0;
+                return body;
+            }
+            catch
+            {
+                return "Unable to read request body.";
+            }
+        }
+
     }
+}
+ 
+
+```
+
+📁 `Program.cs`
+
+```csharp
+using ProductAPI.Application.Interfaces;
+using ProductAPI.Application.Services;
+using ProductAPI.Domain.Interfaces;
+using ProductAPI.Infrastructure.Repositories;
+using ProductAPI.Middleware; 
+using Serilog;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddControllers();
+
+// Configure Serilog
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
+
+// Register services
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+app.UseAuthorization();
+
+// Custom Middleware
+app.UseMiddleware<ExceptionMiddleware>();
+
+
+app.MapControllers();
+
+app.Run();
+
+```
+
+📁 `appsettings.json`
+
+```csharp
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=ProductDB;Trusted_Connection=True;MultipleActiveResultSets=true"
+  },
+  "Serilog": {
+    "Using": [ "Serilog.Sinks.Console", "Serilog.Sinks.File" ],
+    "MinimumLevel": "Information",
+    "WriteTo": [
+      { "Name": "Console" },
+      {
+        "Name": "File",
+        "Args": {
+          "path": "Logs/log-.txt",
+          "rollingInterval": "Day"
+        }
+      }
+    ]
+  }
 }
 ```
 
