@@ -20,19 +20,14 @@ https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 #### 1.2 SOLID Principles คืออะไร?
 
 SOLID คือชุดของหลักการ 5 ข้อ ที่ช่วยให้เราเขียนโค้ด OOP ที่มีคุณภาพ โดยเน้นให้โค้ด แยกหน้าที่ชัดเจน, ยืดหยุ่น, บำรุงรักษาง่าย, และ รองรับการขยายในอนาคต
-* S - Single Responsibility Principle (SRP): Class หนึ่งควรมีหน้าที่รับผิดชอบเพียงอย่างเดียว
-* O - Open/Closed Principle (OCP): ควรจะเปิดสำหรับการขยาย (extension) แต่ปิดสำหรับการแก้ไข (modification)
-* L - Liskov Substitution Principle (LSP): Objects ของ Superclass ควรจะสามารถแทนที่ด้วย Objects ของ Subclass ได้โดยไม่กระทบการทำงานของโปรแกรม
-* I - Interface Segregation Principle (ISP): Client ไม่ควรถูกบังคับให้ implement interface ที่ไม่ได้ใช้งาน
-* D - Dependency Inversion Principle (DIP): High-level modules ไม่ควรขึ้นกับ Low-level modules แต่ทั้งคู่ควรขึ้นกับ Abstractions (Interfaces)
 
 | ย่อ   | หลักการเต็ม                     | ความหมายโดยย่อ                      |
 | ----- | ------------------------------- | ----------------------------------- |
-| **S** | Single Responsibility Principle | หนึ่งคลาสมีหน้าที่เดียว             |
-| **O** | Open/Closed Principle           | แก้ระบบโดยไม่ต้องแก้โค้ดเดิม        |
-| **L** | Liskov Substitution Principle   | Subclass แทน Superclass ได้         |
-| **I** | Interface Segregation Principle | Interface แยกเฉพาะสิ่งที่จำเป็น     |
-| **D** | Dependency Inversion Principle  | พึ่ง abstraction ไม่พึ่ง class จริง |
+| **S** | Single Responsibility Principle (SRP) | หนึ่งคลาสมีหน้าที่เดียว             |
+| **O** | Open/Closed Principle (SRP)           | แก้ระบบโดยไม่ต้องแก้โค้ดเดิม        |
+| **L** | Liskov Substitution Principle (SRP)   | Subclass แทน Superclass ได้         |
+| **I** | Interface Segregation Principle (SRP) | Interface แยกเฉพาะสิ่งที่จำเป็น     |
+| **D** | Dependency Inversion Principle (SRP)  | พึ่ง abstraction ไม่พึ่ง class จริง |
 
 ---
  
