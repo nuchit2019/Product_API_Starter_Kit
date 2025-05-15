@@ -768,3 +768,7 @@ app.Run();
 | Dependency Injection           | ✅     |
 | Configurable Connection String | ✅     |
 | Swagger UI (Dev Mode)          | ✅     |
+
+#
+# ด้วยความปรารถนาดีจากทีม Core System
+#
