@@ -753,12 +753,18 @@ app.Run();
 | **I**   | ไม่ยัด method ที่ไม่จำเป็นใน Interface                          |
 | **D**   | Controller ไม่ขึ้นตรงกับ Implementation (ใช้ DI)                |
 
-## C# Version ✅
+#
+## ✅ สรุป Feature ที่ได้ใน Starter Template นี้:
 
-| 🧠 C# Version     | 🧩 รองรับใน .NET เวอร์ชัน |
-| ----------------- | ------------------------- |
-| C# 9.0            | ✅ **.NET 5.0** (Nov 2020) |
-| C# 10.0           | ✅ .NET 6.0 (Nov 2021)     |
-| C# 11.0           | ✅ .NET 7.0 (Nov 2022)     |
-| C# 12.0           | ✅ .NET 8.0 (Nov 2023)     |
-| C# 13.0           | ✅ .NET 9.0 (Nov 2024)     |
+| Feature                        | ✅ ครบ |
+| ------------------------------ | ----- |
+| Clean Architecture             | ✅     |
+| Dapper ORM                     | ✅     |
+| Repository Pattern             | ✅     |
+| DTO Mapping                    | ✅     |
+| Middleware: Exception Handling | ✅     |
+| Middleware: Response Wrapping  | ✅     |
+| Serilog Logging                | ✅     |
+| Dependency Injection           | ✅     |
+| Configurable Connection String | ✅     |
+| Swagger UI (Dev Mode)          | ✅     |
