@@ -182,7 +182,38 @@ ProductAPI/
 
 ![image](https://github.com/user-attachments/assets/9fb2839e-4609-469e-8cee-35d2698972eb)
 
-### ✅ 4.1 สร้าง Repository (Infrastructure Layer)
+
+### ✅ 4.1 ออกแบบ SQL Query (หมายเลข:1)
+#### GetAll: 
+```
+SELECT * FROM Product
+```
+#### GetById:
+```
+SELECT * FROM Product2 WHERE Id = @Id
+```
+#### Create:
+```
+INSERT INTO Product2 (Name, Description, Price, Stock) 
+VALUES (@Name, @Description, @Price, @Stock)
+SELECT CAST(SCOPE_IDENTITY() as int)
+```
+#### Update:
+```
+UPDATE Product2 SET 
+Name = @Name, 
+Description = @Description, 
+Price = @Price, 
+Stock = @Stock 
+WHERE Id = @Id
+```
+
+#### Delete:
+```
+DELETE FROM Product2 WHERE Id = @Id
+```
+
+### ✅ 4.2 สร้าง Repository (Infrastructure Layer) (หมายเลข:1)
 
 เอา SQL Query ที่ได้ออกแบบไว้ ไปวางใน Code #
 ใน Layer ดังนี้
@@ -274,9 +305,13 @@ namespace ProductAPI.Infrastructure.Repositories
 #
 
 
-### ✅ 4.2 สร้าง Entity (Domain Layer)
 
-📁 `Domain/Entities/Product.cs`
+
+### ✅ 4.3 สร้าง Service Layer (Application Layer) (หมายเลข:3)
+
+ 
+
+📁 4.3.1 สร้าง Entity (Domain Layer) `Domain/Entities/Product.cs`
 
 ```csharp
 public class Product
@@ -299,13 +334,11 @@ public class Product
 
 #
 
-### ✅ 4.3 สร้าง Service Layer (Application Layer)
-
 สร้าง Service Layer แล้ว Inject Repository Layer ผ่าน interface... IProductRepository
 โดยมีการสร้าง Model DTOs (Data Transfer Objects) สำหรับ รับส่งข้อมูลระหว่าง Layer ด้วยดังนี้:
 เราจะใช้ record แทน class
 
-### ✅ 4.3.1 สร้าง DTOs
+📁 4.3.2 สร้าง DTOs
 
 📁 `Application/DTOs/ProductCreateDTO.cs`
 
@@ -340,7 +373,7 @@ namespace ProductAPI.Application.DTOs
 
 #
 
-### ✅ 4.3.2 สร้าง Interface + Service
+📁 4.3.4 สร้าง Interface + Service
 แล้วเรียก ใช้งาน Repository Layer ผ่านการ Inject IProductRepository 
 
 📁 `Application/Interfaces/IProductService.cs`
@@ -450,7 +483,7 @@ namespace ProductAPI.Application.Services
 
 
 
-### ✅ 4.4 Controller (API Layer)
+### ✅ 4.4 Controller (API Layer) (หมายเลข:4)
 
 ใน Layer นี้ เรียกใช้งาน ProductService Layer ผ่านการ Inject IProductService 
 
@@ -569,7 +602,7 @@ namespace ProductAPI.Controllers
 
 #
 
-### ✅ 4.5 Register Service และรวมถึง การเพิ่ม Class อื่น เช่น Middleware + Api Response Wrapper (Common) 
+### ✅ 4.5 Register Service และรวมถึง การเพิ่ม Class อื่น เช่น Middleware + Api Response Wrapper (Common) (หมายเลข:5)
 
 📁 4.5.1 Response Wrapper ... `Common/ApiResponse.cs`
 
@@ -758,7 +791,6 @@ app.Run();
   }
 }
 ```
-
 #
 
 ## 🔚 สรุปแนวทางและ SOLID
