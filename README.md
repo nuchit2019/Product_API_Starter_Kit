@@ -129,6 +129,8 @@ dotnet run --project ProductAPI.csproj
 * ✅ 2. เปิด Task List ... แล้ว Implement ตาม Layer 
 ![image](https://github.com/user-attachments/assets/946fa321-dbf4-4b3b-af4e-41e384fa4d2a)
 
+* ✅ 3. ดับเบิ้ลคลิก บน Task ที่ต้องการ Implement ... จะเปิด หน้าต่าง Code ... 
+![image](https://github.com/user-attachments/assets/fe175e58-704f-4e93-aa98-ef2f61ced9bf)
 
 #
 
