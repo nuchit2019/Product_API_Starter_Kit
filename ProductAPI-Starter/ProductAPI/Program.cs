@@ -18,8 +18,10 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 // Register services
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
+// TODO : Register Service  ...
+
+// TODO : Register Repository ...
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -37,7 +39,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 // Custom Middleware
-app.UseMiddleware<ExceptionMiddleware>();
+// TODO : Register Middleware ...
 
 
 app.MapControllers();
