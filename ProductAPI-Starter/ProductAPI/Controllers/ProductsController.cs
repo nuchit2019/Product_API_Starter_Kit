@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using ProductAPI.Application.DTOs;
 using ProductAPI.Application.Interfaces;
 using ProductAPI.Common;
@@ -23,20 +23,28 @@ namespace ProductAPI.Controllers
         {
             // TODO : Implement ...
             return null;
-
         }
          
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ApiResponse<ProductResponseDTO>>> Get(int id)
+        {
+            // TODO : Implement ...
+            return null;
+        }
 
         [HttpPost]
         public async Task<ActionResult<ApiResponse<ProductResponseDTO>>> Post([FromBody] ProductCreateDTO dto)
         {
+
             // TODO : Implement ...
             return null;
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<ApiResponse<object>>> Put(int id, [FromBody] ProductUpdateDTO dto)
-        {  // TODO : Implement ...
+        {
+            // TODO : Implement ...
             return null;
         }
 
