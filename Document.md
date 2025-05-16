@@ -180,6 +180,9 @@ ProductAPI/
 
 ## 4️⃣ Step-by-Step การเขียน Code (พร้อมอธิบายหลัก SOLID และ Clean Code)
 
+![image](https://github.com/user-attachments/assets/9fb2839e-4609-469e-8cee-35d2698972eb)
+
+
 ### ✅ 4.1 สร้าง Entity (Domain Layer)
 
 📁 `Domain/Entities/Product.cs`
