@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using Microsoft.Data.SqlClient;
 using ProductAPI.Domain.Entities;
 using ProductAPI.Domain.Interfaces;
@@ -18,33 +18,36 @@ namespace ProductAPI.Infrastructure.Repositories
 
 
         public async Task<IEnumerable<Product>> GetAllAsync()
-        {
-             //throw new Exception("Test Exception ** ProductRepository. GetAllAsync() **"); 
-            
+        { 
+            //throw new SqlException("Simulated database error Repository Layer...");
+
             using IDbConnection db = new SqlConnection(_connectionString);
-            return await db.QueryAsync<Product>("SELECT * FROM Product2");
+            return await db.QueryAsync<Product>("SELECT * FROM Products");
         }
 
         public async Task<Product?> GetByIdAsync(int id)
         {
             using IDbConnection db = new SqlConnection(_connectionString);
             return await db.QueryFirstOrDefaultAsync<Product>(
-                "SELECT * FROM Product2 WHERE Id = @Id", new { Id = id });
+                "SELECT * FROM Products WHERE Id = @Id", new { Id = id });
         }
-
-        public async Task<int> CreateAsync(Product product)
+         
+        public async Task<Product> CreateAsync(Product product)
         {
             using IDbConnection db = new SqlConnection(_connectionString);
-            var sql = @"INSERT INTO Product2 (Name, Description, Price, Stock) 
+            var sql = @"INSERT INTO Products (Name, Description, Price, Stock) 
                     VALUES (@Name, @Description, @Price, @Stock);
                     SELECT CAST(SCOPE_IDENTITY() as int)";
-            return await db.QuerySingleAsync<int>(sql, product);
+             
+            var newId = await db.QuerySingleAsync<int>(sql, product);
+            product.Id = newId; 
+            return product;
         }
 
         public async Task<bool> UpdateAsync(Product product)
         {
             using IDbConnection db = new SqlConnection(_connectionString);
-            var sql = @"UPDATE Product2 SET 
+            var sql = @"UPDATE Products SET 
                     Name = @Name, 
                     Description = @Description, 
                     Price = @Price, 
@@ -58,7 +61,7 @@ namespace ProductAPI.Infrastructure.Repositories
         {
             using IDbConnection db = new SqlConnection(_connectionString);
             var affected = await db.ExecuteAsync(
-                "DELETE FROM Product2 WHERE Id = @Id", new { Id = id });
+                "DELETE FROM Products WHERE Id = @Id", new { Id = id });
             return affected > 0;
         }
     }
