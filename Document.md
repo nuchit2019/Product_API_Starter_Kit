@@ -85,9 +85,155 @@ SOLID เป็นคำย่อ ของอักษร 5 ตัว ... แ�
 #
 
 ... **ภาพฝั่งขวาคือเป้าหมาย**ที่เราควรมุ่งไป...
+#
 
+### ไปดูตัวตัวอย่าง **ระบบ CRUD Product API** :
 
+#
 
+## 🔴 ตัวอย่างที่ไม่ดี (Low Cohesion, High Coupling)
+
+```csharp
+// ❌ ProductController.cs (มีหลายความรับผิดชอบรวมกัน)
+[ApiController]
+[Route("api/products")]
+public class ProductController : ControllerBase
+{
+    private readonly SqlConnection _connection;
+
+    public ProductController()
+    {
+        _connection = new SqlConnection("conn_string");
+    }
+
+    [HttpGet]
+    public IActionResult GetProducts()
+    {
+        var sql = "SELECT * FROM Products";
+        // Logic + DB + Mapping + Response ทั้งหมดใน method เดียว
+        // ❌ รวม logic หลายหน้าที่
+        var cmd = new SqlCommand(sql, _connection);
+        var reader = cmd.ExecuteReader();
+        // ... mapping manual
+        return Ok(/* list */);
+    }
+
+    [HttpPost]
+    public IActionResult CreateProduct([FromBody] Product product)
+    {
+        var sql = $"INSERT INTO Products VALUES ('{product.Name}', {product.Price})";
+        // ❌ SQL inline, tightly coupled กับ DB
+        var cmd = new SqlCommand(sql, _connection);
+        cmd.ExecuteNonQuery();
+        return Ok();
+    }
+}
+```
+
+### 🔴 ปัญหาของโค้ดนี้
+
+* ❌ **Low Cohesion**: Controller ทำทั้ง Connection, SQL, Mapping → ไม่แยกความรับผิดชอบ
+* ❌ **High Coupling**: Controller ผูกแน่นกับ DB และ SQL โดยตรง
+* ❌ ทำให้ Test, Reuse, Maintenance ยาก
+
+#
+
+## 🟢 ตัวอย่างที่ดี (High Cohesion, Low Coupling)
+
+```csharp
+// ✅ ProductController.cs – รับผิดชอบแค่ Routing + Logging + Return
+[ApiController]
+[Route("api/products")]
+public class ProductController : ControllerBase
+{
+    private readonly IProductService _productService;
+
+    public ProductController(IProductService productService)
+    {
+        _productService = productService;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var products = await _productService.GetAllAsync();
+        return Ok(products);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] ProductCreateDto dto)
+    {
+        var newProduct = await _productService.CreateAsync(dto);
+        return CreatedAtAction(nameof(GetAll), new { id = newProduct.Id }, newProduct);
+    }
+}
+```
+
+```csharp
+// ✅ ProductService.cs – ทำหน้าที่เฉพาะเรื่องธุรกิจ
+public class ProductService : IProductService
+{
+    private readonly IProductRepository _repository;
+
+    public ProductService(IProductRepository repository)
+    {
+        _repository = repository;
+    }
+
+    public async Task<IEnumerable<ProductDto>> GetAllAsync()
+    {
+        return await _repository.GetAllAsync();
+    }
+
+    public async Task<ProductDto> CreateAsync(ProductCreateDto dto)
+    {
+        var product = new Product { Name = dto.Name, Price = dto.Price };
+        var id = await _repository.InsertAsync(product);
+        product.Id = id;
+        return new ProductDto(product);
+    }
+}
+```
+
+```csharp
+// ✅ ProductRepository.cs – จัดการ DB อย่างเดียว
+public class ProductRepository : IProductRepository
+{
+    private readonly IDbConnection _db;
+
+    public ProductRepository(IConfiguration config)
+    {
+        _db = new SqlConnection(config.GetConnectionString("DefaultConnection"));
+    }
+
+    public async Task<IEnumerable<Product>> GetAllAsync()
+    {
+        var sql = "SELECT * FROM Products";
+        return await _db.QueryAsync<Product>(sql);
+    }
+
+    public async Task<int> InsertAsync(Product product)
+    {
+        var sql = "INSERT INTO Products (Name, Price) VALUES (@Name, @Price); SELECT CAST(SCOPE_IDENTITY() as int)";
+        return await _db.ExecuteScalarAsync<int>(sql, product);
+    }
+}
+```
+
+#
+
+## ✅ จุดเด่นของแนวทางนี้
+
+| หลักการ                | การนำไปใช้                                                                 |
+| ---------------------- | -------------------------------------------------------------------------- |
+| **High Cohesion**      | Controller → Routing / Service → Business Logic / Repo → DB Access         |
+| **Low Coupling**       | Layer ต่าง ๆ ใช้ Interface (IProductService, IProductRepository) เชื่อมกัน |
+| **Test ได้ง่าย**       | แต่ละ Layer test แยกได้ด้วย Mock                                           |
+| **เปลี่ยน DB ได้ง่าย** | ถ้าเปลี่ยนจาก MSSQL → PostgreSQL เปลี่ยนแค่ Repository                     |
+
+#
+ 
+#
 ### 1.4 record  คืออะไร?
 `record` คือ **ชนิดข้อมูล (data type)** แบบใหม่ใน C# ที่ถูกเพิ่มเข้ามาตั้งแต่ **C# 9.0** ซึ่งออกแบบมาเพื่อใช้กับ **ข้อมูลที่เน้นการเก็บค่า (data-centric)** มากกว่า **พฤติกรรม (behavior)**
 
