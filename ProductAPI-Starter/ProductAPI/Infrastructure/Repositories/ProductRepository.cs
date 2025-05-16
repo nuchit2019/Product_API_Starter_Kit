@@ -1,4 +1,4 @@
-﻿using Dapper;
+using Dapper;
 using Microsoft.Data.SqlClient;
 using ProductAPI.Domain.Entities;
 using ProductAPI.Domain.Interfaces;
@@ -12,7 +12,8 @@ namespace ProductAPI.Infrastructure.Repositories
 
         public ProductRepository(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("DefaultConnection")  ?? throw new ArgumentNullException(nameof(configuration), "Connection string 'DefaultConnection' not found.");
+            _connectionString = configuration.GetConnectionString("DefaultConnection")
+                ?? throw new ArgumentNullException(nameof(configuration), "Connection string 'DefaultConnection' not found.");
         }
 
 
@@ -27,11 +28,11 @@ namespace ProductAPI.Infrastructure.Repositories
             // TODO : Implement ...
             return null;
         }
-
-        public async Task<int> CreateAsync(Product product)
+         
+        public async Task<Product> CreateAsync(Product product)
         {
             // TODO : Implement ...
-            return 0;
+            return null;
         }
 
         public async Task<bool> UpdateAsync(Product product)
