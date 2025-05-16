@@ -213,7 +213,7 @@ WHERE Id = @Id
 DELETE FROM Product2 WHERE Id = @Id
 ```
 
-### ✅ 4.2 สร้าง Repository (Infrastructure Layer) (หมายเลข:1)
+### ✅ 4.2 สร้าง Repository (Infrastructure Layer) (หมายเลข:2)
 
 เอา SQL Query ที่ได้ออกแบบไว้ ไปวางใน Code #
 ใน Layer ดังนี้
