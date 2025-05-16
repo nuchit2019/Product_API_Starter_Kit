@@ -306,7 +306,7 @@ https://blog.byalex.dev/article/dapper-queries-synchronized-with-mssql-database-
 
 #
 
-## 1️⃣ โครงสร้างโฟลเดอร์ Project
+## 1️⃣ โครงสร้างโฟลเดอร์ Project WebAPI ...
 
 ```
 ProductAPI/
