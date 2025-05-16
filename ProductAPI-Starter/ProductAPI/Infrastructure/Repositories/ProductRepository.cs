@@ -19,31 +19,31 @@ namespace ProductAPI.Infrastructure.Repositories
 
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
-            // TODO 01 [Repository]: Implement ...
+            // TODO 01 [Repository.GetAllAsync]: Implement ...
             return null;
         }
 
         public async Task<Product?> GetByIdAsync(int id)
         {
-            // TODO 02 [Repository]: Implement ...
+            // TODO 02 [Repository.GetByIdAsync]: Implement ...
             return null;
         }
          
         public async Task<Product> CreateAsync(Product product)
         {
-            // TODO 03 [Repository]: Implement ...
+            // TODO 03 [Repository.CreateAsync]: Implement ...
             return null;
         }
 
         public async Task<bool> UpdateAsync(Product product)
         {
-            // TODO 04 [Repository]: Implement ...
+            // TODO 04 [Repository.UpdateAsync]: Implement ...
             return false;
         }
 
         public async Task<bool> DeleteAsync(int id)
         {
-            // TODO 05 [Repository]: Implement ...
+            // TODO 05 [Repository.DeleteAsync]: Implement ...
             return false;
         }
     }
