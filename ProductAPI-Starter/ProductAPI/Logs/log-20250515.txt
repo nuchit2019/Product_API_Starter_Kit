@@ -1,0 +1,52 @@
+2025-05-15 23:15:10.030 +07:00 [INF] Now listening on: https://localhost:7241
+2025-05-15 23:15:10.075 +07:00 [INF] Now listening on: http://localhost:5016
+2025-05-15 23:15:10.132 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-15 23:15:10.134 +07:00 [INF] Hosting environment: Development
+2025-05-15 23:15:10.135 +07:00 [INF] Content root path: D:\Project\Project_2025\Clean Architecture\202505\Demo\ProductAPI\ProductAPI-Starter\ProductAPI
+2025-05-15 23:15:13.495 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7241/swagger/index.html - null null
+2025-05-15 23:15:13.843 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7241/swagger/index.html - 200 null text/html;charset=utf-8 357.7321ms
+2025-05-15 23:15:13.858 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7241/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-15 23:15:13.875 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7241/_framework/aspnetcore-browser-refresh.js - 200 13756 application/javascript; charset=utf-8 16.9426ms
+2025-05-15 23:15:13.899 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7241/_vs/browserLink - null null
+2025-05-15 23:15:14.561 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7241/_vs/browserLink - 200 null text/javascript; charset=UTF-8 662.8692ms
+2025-05-15 23:15:14.648 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7241/swagger/v1/swagger.json - null null
+2025-05-15 23:15:14.703 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7241/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 56.7853ms
+2025-05-15 23:15:29.023 +07:00 [INF] Now listening on: https://localhost:7241
+2025-05-15 23:15:29.090 +07:00 [INF] Now listening on: http://localhost:5016
+2025-05-15 23:15:29.154 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-15 23:15:29.157 +07:00 [INF] Hosting environment: Development
+2025-05-15 23:15:29.158 +07:00 [INF] Content root path: D:\Project\Project_2025\Clean Architecture\202505\Demo\ProductAPI\ProductAPI-Starter\ProductAPI
+2025-05-15 23:15:29.466 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7241/swagger/index.html - null null
+2025-05-15 23:15:29.723 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7241/swagger/index.html - 200 null text/html;charset=utf-8 267.0974ms
+2025-05-15 23:15:29.774 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7241/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-15 23:15:29.777 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7241/_vs/browserLink - null null
+2025-05-15 23:15:29.783 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7241/_framework/aspnetcore-browser-refresh.js - 200 13756 application/javascript; charset=utf-8 9.239ms
+2025-05-15 23:15:29.830 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7241/_vs/browserLink - 200 null text/javascript; charset=UTF-8 53.6697ms
+2025-05-15 23:15:30.038 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7241/swagger/v1/swagger.json - null null
+2025-05-15 23:15:30.059 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7241/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 21.5203ms
+2025-05-15 23:16:08.497 +07:00 [INF] Now listening on: https://localhost:7241
+2025-05-15 23:16:08.550 +07:00 [INF] Now listening on: http://localhost:5016
+2025-05-15 23:16:08.654 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-15 23:16:08.656 +07:00 [INF] Hosting environment: Development
+2025-05-15 23:16:08.657 +07:00 [INF] Content root path: D:\Project\Project_2025\Clean Architecture\202505\Demo\ProductAPI\ProductAPI-Starter\ProductAPI
+2025-05-15 23:16:09.014 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7241/swagger/index.html - null null
+2025-05-15 23:16:09.196 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7241/swagger/index.html - 200 null text/html;charset=utf-8 194.837ms
+2025-05-15 23:16:09.216 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7241/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-15 23:16:09.229 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7241/_framework/aspnetcore-browser-refresh.js - 200 13756 application/javascript; charset=utf-8 12.3881ms
+2025-05-15 23:16:09.237 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7241/_vs/browserLink - null null
+2025-05-15 23:16:09.285 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7241/_vs/browserLink - 200 null text/javascript; charset=UTF-8 47.9034ms
+2025-05-15 23:16:09.448 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7241/swagger/v1/swagger.json - null null
+2025-05-15 23:16:09.469 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7241/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 21.5437ms
+2025-05-15 23:17:14.091 +07:00 [INF] Now listening on: https://localhost:7241
+2025-05-15 23:17:14.130 +07:00 [INF] Now listening on: http://localhost:5016
+2025-05-15 23:17:14.192 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-15 23:17:14.194 +07:00 [INF] Hosting environment: Development
+2025-05-15 23:17:14.195 +07:00 [INF] Content root path: D:\Project\Project_2025\Clean Architecture\202505\Demo\ProductAPI\ProductAPI-Starter\ProductAPI
+2025-05-15 23:17:14.823 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7241/swagger/index.html - null null
+2025-05-15 23:17:15.016 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7241/swagger/index.html - 200 null text/html;charset=utf-8 202.4264ms
+2025-05-15 23:17:15.038 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7241/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-15 23:17:15.051 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7241/_framework/aspnetcore-browser-refresh.js - 200 13756 application/javascript; charset=utf-8 12.0614ms
+2025-05-15 23:17:15.063 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7241/_vs/browserLink - null null
+2025-05-15 23:17:15.124 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7241/_vs/browserLink - 200 null text/javascript; charset=UTF-8 61.4145ms
+2025-05-15 23:17:15.321 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7241/swagger/v1/swagger.json - null null
+2025-05-15 23:17:15.341 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7241/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 20.3735ms
