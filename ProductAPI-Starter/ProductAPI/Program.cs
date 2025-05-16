@@ -18,9 +18,9 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 // Register services
-// TODO : Register Service  ...
+// TODO 01 [Register]: Implement ... Service  ...
 
-// TODO : Register Repository ...
+// TODO 02 [Register]: Implement ... Repository ...
 
 
 builder.Services.AddEndpointsApiExplorer();
@@ -39,7 +39,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 // Custom Middleware
-// TODO : Register Middleware ...
+// TODO 03 [Register]: Implement ... Middleware ...
 
 
 app.MapControllers();
