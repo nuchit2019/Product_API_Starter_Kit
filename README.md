@@ -38,7 +38,7 @@ https://github.com/nuchit2019/Product_API_Starter_Kit/tree/Final
 - 🛠 Dapper (Micro ORM)
 - 🧪 API + DTO Layer
 - ⚙️ Global Exception Handling Middleware
-- 📦 Response Wrapping Middleware
+- 📦 Response Wrapping
 - 🔥 Logging ด้วย Serilog (Console + File)
 - 📄 Swagger UI
 
