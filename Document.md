@@ -387,7 +387,7 @@ ProductAPI/
 ### ✅ 4.1 ออกแบบ SQL Query (หมายเลข:1)
 #### GetAll: 
 ```
-SELECT * FROM Product
+SELECT * FROM Products
 ```
 #### GetById:
 ```
@@ -395,13 +395,13 @@ SELECT * FROM Product2 WHERE Id = @Id
 ```
 #### Create:
 ```
-INSERT INTO Product2 (Name, Description, Price, Stock) 
+INSERT INTO Products (Name, Description, Price, Stock) 
 VALUES (@Name, @Description, @Price, @Stock)
 SELECT CAST(SCOPE_IDENTITY() as int)
 ```
 #### Update:
 ```
-UPDATE Product2 SET 
+UPDATE Products SET 
 Name = @Name, 
 Description = @Description, 
 Price = @Price, 
@@ -411,7 +411,7 @@ WHERE Id = @Id
 
 #### Delete:
 ```
-DELETE FROM Product2 WHERE Id = @Id
+DELETE FROM Products WHERE Id = @Id
 ```
 
 ### ✅ 4.2 สร้าง Repository (Infrastructure Layer) (หมายเลข:2)
