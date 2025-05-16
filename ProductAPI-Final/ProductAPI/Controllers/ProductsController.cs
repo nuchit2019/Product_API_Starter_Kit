@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using ProductAPI.Application.DTOs;
 using ProductAPI.Application.Interfaces;
 using ProductAPI.Common;
@@ -31,7 +31,7 @@ namespace ProductAPI.Controllers
                     statusCode: StatusCodes.Status200OK
                 );
 
-                //throw new Exception("Test Exception GetAllProducts---------------");
+                //throw new Exception(" Simulated Exception in Controller *********** ");
                 return Ok(response);
             }
             catch (Exception ex)
@@ -66,7 +66,8 @@ namespace ProductAPI.Controllers
 
         [HttpPost]
         public async Task<ActionResult<ApiResponse<ProductResponseDTO>>> Post([FromBody] ProductCreateDTO dto)
-        {
+        { 
+
             var product = await _productService.CreateAsync(dto);
 
             //throw new Exception("Test Exception CreatedAtAction -----------------------");
