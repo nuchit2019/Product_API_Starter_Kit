@@ -16,39 +16,39 @@ namespace ProductAPI.Application.Services
 
         public async Task<IEnumerable<ProductResponseDTO>> GetAllAsync()
         {
-            // TODO : Implement ...
+            // TODO 01 [Service]: Implement ...
             return null;
         }
 
         public async Task<ProductResponseDTO?> GetByIdAsync(int id)
         {
-            // TODO : Implement ...
+            // TODO 02 [Service]: Implement ...
             return null;
         }
 
         public async Task<ProductResponseDTO> CreateAsync(ProductCreateDTO productDto)
         {
-            // TODO : Implement ...
+            // TODO 03 [Service]: Implement ...
             return null;
 
         }
 
         public async Task<bool> UpdateAsync(ProductUpdateDTO updateProductDto)
         {
-            // TODO : Implement ...
-            return  false ;
+            // TODO 04 [Service]: Implement ...
+            return false ;
 
         }
 
         public async Task<bool> DeleteAsync(int id)
         {
-            // TODO : Implement ...
-            return   false ;
+            // TODO 05 [Service]: Implement ...
+            return false ;
         }
 
         private static ProductResponseDTO MapToDTO(Product product)
         {
-            // TODO : Implement ...
+            // TODO 06 [Service]: Implement ...
             return null;
         }
     }
