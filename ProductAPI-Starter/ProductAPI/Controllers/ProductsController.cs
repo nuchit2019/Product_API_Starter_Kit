@@ -21,7 +21,7 @@ namespace ProductAPI.Controllers
         [HttpGet] 
         public async Task<ActionResult<IEnumerable<ProductResponseDTO>>> GetAllProducts()
         {
-            // TODO 01 [Controller]: Implement ...
+            // TODO 01 [Controller.GetAllProducts]: Implement ...
             return null;
         }
          
@@ -29,7 +29,7 @@ namespace ProductAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ApiResponse<ProductResponseDTO>>> Get(int id)
         {
-            // TODO 02 [Controller]: Implement ...
+            // TODO 02 [Controller.Get]: Implement ...
             return null;
         }
 
@@ -37,21 +37,21 @@ namespace ProductAPI.Controllers
         public async Task<ActionResult<ApiResponse<ProductResponseDTO>>> Post([FromBody] ProductCreateDTO dto)
         {
 
-            // TODO 03 [Controller]: Implement ...
+            // TODO 03 [Controller.Post]: Implement ...
             return null;
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<ApiResponse<object>>> Put(int id, [FromBody] ProductUpdateDTO dto)
         {
-            // TODO 04 [Controller]: Implement ...
+            // TODO 04 [Controller.Put]: Implement ...
             return null;
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<ApiResponse<object>>> Delete(int id)
         {
-            // TODO 05 [Controller]: Implement ...
+            // TODO 05 [Controller.Delete]: Implement ...
             return null;
         }
     }
