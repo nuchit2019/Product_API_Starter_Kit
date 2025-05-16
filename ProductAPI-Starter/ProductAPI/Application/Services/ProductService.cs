@@ -1,4 +1,4 @@
-﻿using ProductAPI.Application.DTOs;
+using ProductAPI.Application.DTOs;
 using ProductAPI.Application.Interfaces;
 using ProductAPI.Domain.Entities;
 using ProductAPI.Domain.Interfaces;
@@ -30,18 +30,20 @@ namespace ProductAPI.Application.Services
         {
             // TODO : Implement ...
             return null;
+
         }
 
-        public async Task<bool> UpdateAsync(ProductUpdateDTO productDto)
+        public async Task<bool> UpdateAsync(ProductUpdateDTO updateProductDto)
         {
             // TODO : Implement ...
-            return false;
+            return  false ;
+
         }
 
         public async Task<bool> DeleteAsync(int id)
         {
             // TODO : Implement ...
-            return false ;
+            return   false ;
         }
 
         private static ProductResponseDTO MapToDTO(Product product)
