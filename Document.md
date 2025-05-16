@@ -5,6 +5,12 @@ Project นี้จะแนะนำขั้นตอนการสร้า
 #
 ## 1. ความรู้พื้นฐาน และเครื่องมือที่ใช้...
 
+* 1.1 Clean Architecture คืออะไร?
+* 1.2 SOLID Principles คืออะไร?
+* 1.3 High Cohesion and Low Coupling คืออะไร?
+* 1.4 record คืออะไร?
+* 1.5 Dapper คืออะไร?
+
 ### 1.1 Clean Architecture คืออะไร?
 Clean Architecture เป็นสถาปัตยกรรมการออกแบบซอฟต์แวร์ที่เน้นการแยกส่วนประกอบ (Separation of Concerns) ทำให้โค้ดเป็นอิสระจาก Frameworks, UI, และ Database มากที่สุด โดยมีหัวใจหลักคือ **Domain Layer** และ **Application Layer** ที่ไม่ขึ้นกับส่วนอื่นๆ ทำให้ง่ายต่อการทดสอบ (Testable), บำรุงรักษา (Maintainable), และเปลี่ยนแปลง (Flexible)
 
