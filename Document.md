@@ -38,7 +38,7 @@ SOLID เป็นคำย่อ ของอักษร 5 ตัว ... แ�
 | **D** | Dependency Inversion Principle (SRP)  | พึ่ง abstraction, interface ไม่พึ่ง class จริง |
 
 #
-### 1.3 High Cohesion and Low Coupling?
+### 1.3 High Cohesion and Low Coupling คืออะไร?
 ![image](https://github.com/user-attachments/assets/f92ebcc4-db33-48f2-9dd2-81eca7a5b374)
 
 จากภาพ...เป็นการเปรียบเทียบระหว่าง **Low Cohesion และ High Coupling** กับ **High Cohesion และ Low Coupling** ซึ่งเป็นแนวคิดพื้นฐานที่สำคัญใน **การออกแบบซอฟต์แวร์**
