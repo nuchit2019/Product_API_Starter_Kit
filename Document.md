@@ -10,6 +10,7 @@ Project นี้จะแนะนำขั้นตอนการสร้า
 * 1.3 High Cohesion and Low Coupling คืออะไร?
 * 1.4 record คืออะไร?
 * 1.5 Dapper คืออะไร?
+#
 
 ### 1.1 Clean Architecture คืออะไร?
 Clean Architecture เป็นสถาปัตยกรรมการออกแบบซอฟต์แวร์ที่เน้นการแยกส่วนประกอบ (Separation of Concerns) ทำให้โค้ดเป็นอิสระจาก Frameworks, UI, และ Database มากที่สุด โดยมีหัวใจหลักคือ **Domain Layer** และ **Application Layer** ที่ไม่ขึ้นกับส่วนอื่นๆ ทำให้ง่ายต่อการทดสอบ (Testable), บำรุงรักษา (Maintainable), และเปลี่ยนแปลง (Flexible)
@@ -282,7 +283,7 @@ Dapper เป็น Micro ORM (Object-Relational Mapper) สำหรับ .NET
 
 ![image](https://github.com/user-attachments/assets/9b9a7864-5b92-4450-b2a0-292bcea74210)
 https://blog.byalex.dev/article/dapper-queries-synchronized-with-mssql-database-schema
-
+ 
 #
 ### 1.4 เครื่องมือที่ต้องใช้:
 1.  **Visual Studio 2022,VSCode** .NET 6.0 หรือใหม่กว่า
