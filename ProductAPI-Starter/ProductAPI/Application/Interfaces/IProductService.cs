@@ -1,4 +1,4 @@
-﻿using ProductAPI.Application.DTOs;
+using ProductAPI.Application.DTOs;
 
 namespace ProductAPI.Application.Interfaces
 {
