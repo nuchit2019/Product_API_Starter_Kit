@@ -17,6 +17,7 @@ Clean Architecture เป็นสถาปัตยกรรมการออ�
 ![image](https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg)
 https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 
+#
 ### 1.2 SOLID Principles คืออะไร?
 ![image](https://github.com/user-attachments/assets/4e4a02da-8d36-4503-8c7c-4e4665cd718a)
 #
@@ -59,27 +60,28 @@ SOLID คือชุดของหลักการ 5 ข้อ ที่ช�
 | ✅ ต้องการ Copy แล้วเปลี่ยนค่าแค่บางส่วน      | ใช้ `with` expression             |
 | ✅ ต้องการเปรียบเทียบด้วยค่า (Value Equality) | เช่น ใน Unit Test                 |
 
----
+#
 #### 📌 สรุปสั้น ๆ
 
 > `record` = **"class ที่เน้นเก็บข้อมูล"**
 > ✅ Immutable, ✅ Value Equality, ✅ Syntax กระชับ
 > เหมาะกับ DTO, Response, Command, Query ใน Clean Architecture
 
-
+#
 ### 1.4 Dapper คืออะไร?
 Dapper เป็น Micro ORM (Object-Relational Mapper) สำหรับ .NET ที่มีความเร็วสูง ใช้งานง่าย และให้ความยืดหยุ่นในการเขียน SQL Query โดยตรง ถ้า Query คุณยาว 8 เมตร ... จงใช้มันเถอะ...
 
 ![image](https://github.com/user-attachments/assets/9b9a7864-5b92-4450-b2a0-292bcea74210)
 https://blog.byalex.dev/article/dapper-queries-synchronized-with-mssql-database-schema
 
-
+#
 ### 1.4 เครื่องมือที่ต้องใช้:
 1.  **Visual Studio 2022,VSCode** .NET 6.0 หรือใหม่กว่า
 2.  **SQL Server Management Studio (SSMS)** หรือเครื่องมือจัดการฐานข้อมูล SQL Server อื่นๆ
 3.  **SQL Server LocalDB** (มักจะติดตั้งมาพร้อมกับ Visual Studio)
 4.  **Postman** หรือเครื่องมืออื่นสำหรับทดสอบ API
-****
+
+#
 
 ## 🛠️ คู่มือสร้างระบบ Product API ด้วย .NET 8 + Dapper + Clean Architecture
 
