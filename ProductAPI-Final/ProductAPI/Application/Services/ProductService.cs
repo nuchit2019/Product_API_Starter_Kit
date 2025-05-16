@@ -1,4 +1,4 @@
-﻿using ProductAPI.Application.DTOs;
+using ProductAPI.Application.DTOs;
 using ProductAPI.Application.Interfaces;
 using ProductAPI.Domain.Entities;
 using ProductAPI.Domain.Interfaces;
@@ -18,7 +18,7 @@ namespace ProductAPI.Application.Services
         {
             var products = await _productRepository.GetAllAsync();
 
-            // throw new Exception("Test Exception ProductService---------------");
+            //throw new InvalidOperationException("Simulated exception in Service Layer");
             return products.Select(p => MapToDTO(p));
         }
 
@@ -29,31 +29,35 @@ namespace ProductAPI.Application.Services
         }
 
         public async Task<ProductResponseDTO> CreateAsync(ProductCreateDTO productDto)
-        {
-            var product = new Product
+        { 
+            var entity = new Product
             {
                 Name = productDto.Name,
                 Description = productDto.Description,
                 Price = productDto.Price,
-                Stock = productDto.Stock
+                Stock = productDto.Stock,
+                CreatedAt = DateTime.UtcNow
             };
+             
+            var newProduct = await _productRepository.CreateAsync(entity);
+            return MapToDTO(newProduct);
 
-            product.Id = await _productRepository.CreateAsync(product);
-            return MapToDTO(product);
         }
 
-        public async Task<bool> UpdateAsync(ProductUpdateDTO productDto)
-        {
-            var product = new Product
-            {
-                Id = productDto.Id,
-                Name = productDto.Name,
-                Description = productDto.Description,
-                Price = productDto.Price,
-                Stock = productDto.Stock
-            };
+        public async Task<bool> UpdateAsync(ProductUpdateDTO updateProductDto)
+        { 
+            var existingProduct = await _productRepository.GetByIdAsync(updateProductDto.Id);
+            if (existingProduct is null)
+                return false;
 
-            return await _productRepository.UpdateAsync(product);
+            existingProduct.Name = updateProductDto.Name ?? existingProduct.Name;
+            existingProduct.Description = updateProductDto.Description ?? existingProduct.Description;
+            existingProduct.Price = updateProductDto.Price ?? existingProduct.Price;
+            existingProduct.Stock = updateProductDto.Stock ?? existingProduct.Stock;
+            existingProduct.UpdatedAt = DateTime.UtcNow;
+
+            return await _productRepository.UpdateAsync(existingProduct);
+
         }
 
         public async Task<bool> DeleteAsync(int id)
@@ -68,7 +72,10 @@ namespace ProductAPI.Application.Services
                 product.Name,
                 product.Description,
                 product.Price,
-                product.Stock);
+                product.Stock,
+                product.CreatedAt,
+                product.UpdatedAt
+              );
         }
     }
 }
