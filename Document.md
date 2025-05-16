@@ -182,8 +182,99 @@ ProductAPI/
 
 ![image](https://github.com/user-attachments/assets/9fb2839e-4609-469e-8cee-35d2698972eb)
 
+### ✅ 4.1 สร้าง Repository (Infrastructure Layer)
 
-### ✅ 4.1 สร้าง Entity (Domain Layer)
+เอา SQL Query ที่ได้ออกแบบไว้ ไปวางใน Code #
+ใน Layer ดังนี้
+
+📁 4.1.1 สร้าง interface... `Domain/Interfaces/IProductRepository.cs`
+
+```csharp
+public interface IProductRepository
+{
+    Task<IEnumerable<Product>> GetAllAsync();
+    Task<Product?> GetByIdAsync(int id);
+    Task<int> CreateAsync(Product product);
+    Task<bool> UpdateAsync(Product product);
+    Task<bool> DeleteAsync(int id);
+}
+```
+
+📁 4.1.2 สร้าง Class Repository... `Infrastructure/Repositories/ProductRepository.cs`
+ทำหน้าที่ implement (นำไปใช้) ตาม interface IProductRepository ซึ่งเป็นแนวทางพื้นฐานของ Object-Oriented Programming (OOP) และใช้บ่อยในแนวคิด SOLID, Clean Architecture เพื่อแยกความรับผิดชอบและทำให้ระบบยืดหยุ่น
+ดังนี้
+
+```csharp
+
+namespace ProductAPI.Infrastructure.Repositories
+{
+    public class ProductRepository : IProductRepository
+    {
+        private readonly string _connectionString; 
+
+        public ProductRepository(IConfiguration configuration)
+        {
+            _connectionString = configuration.GetConnectionString("DefaultConnection")
+                ?? throw new ArgumentNullException(nameof(configuration), "Connection string 'DefaultConnection' not found.");
+        }
+
+
+        public async Task<IEnumerable<Product>> GetAllAsync()
+        {
+             //throw new Exception("Test Exception ** ProductRepository. GetAllAsync() **"); 
+            
+            using IDbConnection db = new SqlConnection(_connectionString);
+            return await db.QueryAsync<Product>("SELECT * FROM Product2");
+        }
+
+        public async Task<Product?> GetByIdAsync(int id)
+        {
+            using IDbConnection db = new SqlConnection(_connectionString);
+            return await db.QueryFirstOrDefaultAsync<Product>(
+                "SELECT * FROM Product2 WHERE Id = @Id", new { Id = id });
+        }
+
+        public async Task<int> CreateAsync(Product product)
+        {
+            using IDbConnection db = new SqlConnection(_connectionString);
+            var sql = @"INSERT INTO Product2 (Name, Description, Price, Stock) 
+                    VALUES (@Name, @Description, @Price, @Stock);
+                    SELECT CAST(SCOPE_IDENTITY() as int)";
+            return await db.QuerySingleAsync<int>(sql, product);
+        }
+
+        public async Task<bool> UpdateAsync(Product product)
+        {
+            using IDbConnection db = new SqlConnection(_connectionString);
+            var sql = @"UPDATE Product2 SET 
+                    Name = @Name, 
+                    Description = @Description, 
+                    Price = @Price, 
+                    Stock = @Stock 
+                    WHERE Id = @Id";
+            var affected = await db.ExecuteAsync(sql, product);
+            return affected > 0;
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            using IDbConnection db = new SqlConnection(_connectionString);
+            var affected = await db.ExecuteAsync(
+                "DELETE FROM Product2 WHERE Id = @Id", new { Id = id });
+            return affected > 0;
+        }
+    }
+}
+
+```
+**🧠 SOLID Principles:**
+ 
+ * **Single Responsibility Principle (SRP):** `ProductRepository` รับผิดชอบเฉพาะการเข้าถึงข้อมูล Product ใน Database จัดการเฉพาะ Data Access.
+ * **Dependency Inversion Principle (DIP):** Implement `IProductRepository` ที่กำหนดโดย Application Layer.
+#
+
+
+### ✅ 4.2 สร้าง Entity (Domain Layer)
 
 📁 `Domain/Entities/Product.cs`
 
@@ -208,7 +299,13 @@ public class Product
 
 #
 
-### ✅ 4.2 สร้าง DTO (Application Layer)
+### ✅ 4.3 สร้าง Service Layer (Application Layer)
+
+สร้าง Service Layer แล้ว Inject Repository Layer ผ่าน interface... IProductRepository
+โดยมีการสร้าง Model DTOs (Data Transfer Objects) สำหรับ รับส่งข้อมูลระหว่าง Layer ด้วยดังนี้:
+เราจะใช้ record แทน class
+
+### ✅ 4.3.1 สร้าง DTOs
 
 📁 `Application/DTOs/ProductCreateDTO.cs`
 
@@ -234,7 +331,7 @@ namespace ProductAPI.Application.DTOs
     public record ProductUpdateDTO(int Id, string Name, string Description, decimal Price, int Stock);
 }
 ```
-
+* DTO = คลาสที่ใช้ส่ง/รับข้อมูล ไม่ใช่ตัวแทนของตารางในฐานข้อมูลโดยตรง
 
 **🧠 SOLID Principles:**
 
@@ -243,7 +340,8 @@ namespace ProductAPI.Application.DTOs
 
 #
 
-### ✅ 4.3 สร้าง Interface + Service (Application Layer)
+### ✅ 4.3.2 สร้าง Interface + Service
+แล้วเรียก ใช้งาน Repository Layer ผ่านการ Inject IProductRepository 
 
 📁 `Application/Interfaces/IProductService.cs`
 
@@ -351,93 +449,10 @@ namespace ProductAPI.Application.Services
 #
 
 
-### ✅ 4.4 สร้าง Repository (Infrastructure Layer)
 
-📁 `Domain/Interfaces/IProductRepository.cs`
+### ✅ 4.4 Controller (API Layer)
 
-```csharp
-public interface IProductRepository
-{
-    Task<IEnumerable<Product>> GetAllAsync();
-    Task<Product?> GetByIdAsync(int id);
-    Task<int> CreateAsync(Product product);
-    Task<bool> UpdateAsync(Product product);
-    Task<bool> DeleteAsync(int id);
-}
-```
-
-📁 `Infrastructure/Repositories/ProductRepository.cs`
-
-```csharp
-
-namespace ProductAPI.Infrastructure.Repositories
-{
-    public class ProductRepository : IProductRepository
-    {
-        private readonly string _connectionString; 
-
-        public ProductRepository(IConfiguration configuration)
-        {
-            _connectionString = configuration.GetConnectionString("DefaultConnection")
-                ?? throw new ArgumentNullException(nameof(configuration), "Connection string 'DefaultConnection' not found.");
-        }
-
-
-        public async Task<IEnumerable<Product>> GetAllAsync()
-        {
-             //throw new Exception("Test Exception ** ProductRepository. GetAllAsync() **"); 
-            
-            using IDbConnection db = new SqlConnection(_connectionString);
-            return await db.QueryAsync<Product>("SELECT * FROM Product2");
-        }
-
-        public async Task<Product?> GetByIdAsync(int id)
-        {
-            using IDbConnection db = new SqlConnection(_connectionString);
-            return await db.QueryFirstOrDefaultAsync<Product>(
-                "SELECT * FROM Product2 WHERE Id = @Id", new { Id = id });
-        }
-
-        public async Task<int> CreateAsync(Product product)
-        {
-            using IDbConnection db = new SqlConnection(_connectionString);
-            var sql = @"INSERT INTO Product2 (Name, Description, Price, Stock) 
-                    VALUES (@Name, @Description, @Price, @Stock);
-                    SELECT CAST(SCOPE_IDENTITY() as int)";
-            return await db.QuerySingleAsync<int>(sql, product);
-        }
-
-        public async Task<bool> UpdateAsync(Product product)
-        {
-            using IDbConnection db = new SqlConnection(_connectionString);
-            var sql = @"UPDATE Product2 SET 
-                    Name = @Name, 
-                    Description = @Description, 
-                    Price = @Price, 
-                    Stock = @Stock 
-                    WHERE Id = @Id";
-            var affected = await db.ExecuteAsync(sql, product);
-            return affected > 0;
-        }
-
-        public async Task<bool> DeleteAsync(int id)
-        {
-            using IDbConnection db = new SqlConnection(_connectionString);
-            var affected = await db.ExecuteAsync(
-                "DELETE FROM Product2 WHERE Id = @Id", new { Id = id });
-            return affected > 0;
-        }
-    }
-}
-
-```
-**🧠 SOLID Principles:**
- 
- * **Single Responsibility Principle (SRP):** `ProductRepository` รับผิดชอบเฉพาะการเข้าถึงข้อมูล Product ใน Database จัดการเฉพาะ Data Access.
- * **Dependency Inversion Principle (DIP):** Implement `IProductRepository` ที่กำหนดโดย Application Layer.
-#
-
-### ✅ 4.5 Controller (API Layer)
+ใน Layer นี้ เรียกใช้งาน ProductService Layer ผ่านการ Inject IProductService 
 
 📁 `Controllers/ProductsController.cs`
 
@@ -554,9 +569,9 @@ namespace ProductAPI.Controllers
 
 #
 
-### ✅ 4.6 Middleware + ApiResponse (Common)
+### ✅ 4.5 Register Service และรวมถึง การเพิ่ม Class อื่น เช่น Middleware + Api Response Wrapper (Common) 
 
-📁 `Common/ApiResponse.cs`
+📁 4.5.1 Response Wrapper ... `Common/ApiResponse.cs`
 
 ```csharp
 namespace ProductAPI.Common
@@ -571,7 +586,7 @@ namespace ProductAPI.Common
 }
 ```
 
-📁 `Middleware/ExceptionMiddleware.cs`
+📁 4.5.2 `Middleware/ExceptionMiddleware.cs`
 
 ```csharp
 
@@ -669,7 +684,7 @@ namespace ProductAPI.Middleware
 
 ```
 
-📁 `Program.cs`
+📁 4.5.3 Register Service ใน `Program.cs`
 
 ```csharp
 using ProductAPI.Application.Interfaces;
@@ -720,7 +735,7 @@ app.Run();
 
 ```
 
-📁 `appsettings.json`
+📁 4.5.4 `appsettings.json`
 
 ```csharp
 {
