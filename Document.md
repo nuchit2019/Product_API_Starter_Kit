@@ -221,14 +221,14 @@ DELETE FROM Product2 WHERE Id = @Id
 📁 4.1.1 สร้าง interface... `Domain/Interfaces/IProductRepository.cs`
 
 ```csharp
-public interface IProductRepository
-{
-    Task<IEnumerable<Product>> GetAllAsync();
-    Task<Product?> GetByIdAsync(int id);
-    Task<int> CreateAsync(Product product);
-    Task<bool> UpdateAsync(Product product);
-    Task<bool> DeleteAsync(int id);
-}
+    public interface IProductRepository
+    {
+        Task<IEnumerable<Product>> GetAllAsync();
+        Task<Product?> GetByIdAsync(int id); 
+        Task<Product> CreateAsync(Product product);
+        Task<bool> UpdateAsync(Product product);
+        Task<bool> DeleteAsync(int id);
+    }
 ```
 
 📁 4.1.2 สร้าง Class Repository... `Infrastructure/Repositories/ProductRepository.cs`
@@ -236,7 +236,6 @@ public interface IProductRepository
 ดังนี้
 
 ```csharp
-
 namespace ProductAPI.Infrastructure.Repositories
 {
     public class ProductRepository : IProductRepository
@@ -251,33 +250,36 @@ namespace ProductAPI.Infrastructure.Repositories
 
 
         public async Task<IEnumerable<Product>> GetAllAsync()
-        {
-             //throw new Exception("Test Exception ** ProductRepository. GetAllAsync() **"); 
-            
+        { 
+            //throw new SqlException("Simulated database error Repository Layer...");
+
             using IDbConnection db = new SqlConnection(_connectionString);
-            return await db.QueryAsync<Product>("SELECT * FROM Product2");
+            return await db.QueryAsync<Product>("SELECT * FROM Products");
         }
 
         public async Task<Product?> GetByIdAsync(int id)
         {
             using IDbConnection db = new SqlConnection(_connectionString);
             return await db.QueryFirstOrDefaultAsync<Product>(
-                "SELECT * FROM Product2 WHERE Id = @Id", new { Id = id });
+                "SELECT * FROM Products WHERE Id = @Id", new { Id = id });
         }
-
-        public async Task<int> CreateAsync(Product product)
+         
+        public async Task<Product> CreateAsync(Product product)
         {
             using IDbConnection db = new SqlConnection(_connectionString);
-            var sql = @"INSERT INTO Product2 (Name, Description, Price, Stock) 
+            var sql = @"INSERT INTO Products (Name, Description, Price, Stock) 
                     VALUES (@Name, @Description, @Price, @Stock);
                     SELECT CAST(SCOPE_IDENTITY() as int)";
-            return await db.QuerySingleAsync<int>(sql, product);
+             
+            var newId = await db.QuerySingleAsync<int>(sql, product);
+            product.Id = newId; 
+            return product;
         }
 
         public async Task<bool> UpdateAsync(Product product)
         {
             using IDbConnection db = new SqlConnection(_connectionString);
-            var sql = @"UPDATE Product2 SET 
+            var sql = @"UPDATE Products SET 
                     Name = @Name, 
                     Description = @Description, 
                     Price = @Price, 
@@ -291,12 +293,11 @@ namespace ProductAPI.Infrastructure.Repositories
         {
             using IDbConnection db = new SqlConnection(_connectionString);
             var affected = await db.ExecuteAsync(
-                "DELETE FROM Product2 WHERE Id = @Id", new { Id = id });
+                "DELETE FROM Products WHERE Id = @Id", new { Id = id });
             return affected > 0;
         }
     }
 }
-
 ```
 **🧠 SOLID Principles:**
  
@@ -314,16 +315,21 @@ namespace ProductAPI.Infrastructure.Repositories
 📁 4.3.1 สร้าง Entity (Domain Layer) `Domain/Entities/Product.cs`
 
 ```csharp
-public class Product
+namespace ProductAPI.Domain.Entities
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string? Description { get; set; }
-    public decimal Price { get; set; }
-    public int Stock { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime? UpdatedAt { get; set; }
+    public class Product
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string? Description { get; set; }
+        public decimal Price { get; set; }
+        public int Stock { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+    }
 }
+
+
 ```
 *หมายเหตุ:* การใช้ `string.Empty` และ `?` (nullable reference types) ช่วยในการจัดการ Nullability ใน C# 8.0+
 
@@ -345,24 +351,66 @@ public class Product
 ```csharp
 namespace ProductAPI.Application.DTOs
 {
-    public record ProductCreateDTO(string Name, string Description, decimal Price, int Stock);
+    public record ProductCreateDTO(
+        [Required(ErrorMessage = "Product name is required."),StringLength(100, MinimumLength = 3, ErrorMessage = "Product name must be between 3 and 100 characters.")]
+        string Name,
+
+        string? Description,
+
+        [Range(0.01, 1000000, ErrorMessage = "Price must be greater than 0.")]  
+        decimal Price,
+
+        [Range(0, int.MaxValue, ErrorMessage = "Stock must be a non-negative number.")]
+        int Stock
+
+   ); 
+
 }
+
 ```
 📁 `Application/DTOs/ProductResponseDTO.cs`
 
 ```csharp
 namespace ProductAPI.Application.DTOs
 {
-    public record ProductResponseDTO(int Id, string Name, string Description, decimal Price, int Stock);
+    public record ProductResponseDTO( 
+        int Id,
+        string Name,
+        string? Description,
+        decimal Price,
+        int Stock,
+        DateTime CreatedAt,
+        DateTime? UpdatedAt
+        );
 }
 ```
 📁 `Application/DTOs/ProductUpdateDTO.cs`
 
 ```csharp
+
 namespace ProductAPI.Application.DTOs
 {
-    public record ProductUpdateDTO(int Id, string Name, string Description, decimal Price, int Stock);
+    public record ProductUpdateDTO( 
+
+      
+        [Required(ErrorMessage = "Product ID is required for update.")]
+        int Id,
+
+        [Required(ErrorMessage = "Product name is required."),StringLength(100, MinimumLength = 3, ErrorMessage = "Product name must be between 3 and 100 characters.")]
+        string? Name,
+
+        string? Description,
+
+        [Range(0.01, 1000000, ErrorMessage = "Price must be greater than 0.")]
+        decimal? Price,
+
+        [Range(0, int.MaxValue, ErrorMessage = "Stock must be a non-negative number.")]
+        int? Stock
+
+        );
 }
+
+
 ```
 * DTO = คลาสที่ใช้ส่ง/รับข้อมูล ไม่ใช่ตัวแทนของตารางในฐานข้อมูลโดยตรง
 
@@ -379,6 +427,7 @@ namespace ProductAPI.Application.DTOs
 📁 `Application/Interfaces/IProductService.cs`
 
 ```csharp
+
 namespace ProductAPI.Application.Interfaces
 {
     public interface IProductService
@@ -390,6 +439,8 @@ namespace ProductAPI.Application.Interfaces
         Task<bool> DeleteAsync(int id);
     }
 }
+
+
 ```
 
 📁 `Application/Services/ProductService.cs`
@@ -398,10 +449,6 @@ namespace ProductAPI.Application.Interfaces
 
  // File: Application/Services/ProductService.cs
 
-using ProductAPI.Application.DTOs;
-using ProductAPI.Application.Interfaces;
-using ProductAPI.Domain.Entities;
-using ProductAPI.Domain.Interfaces;
 
 namespace ProductAPI.Application.Services
 {
@@ -418,7 +465,7 @@ namespace ProductAPI.Application.Services
         {
             var products = await _productRepository.GetAllAsync();
 
-            // throw new Exception("Test Exception ProductService---------------");
+            //throw new InvalidOperationException("Simulated exception in Service Layer");
             return products.Select(p => MapToDTO(p));
         }
 
@@ -429,31 +476,35 @@ namespace ProductAPI.Application.Services
         }
 
         public async Task<ProductResponseDTO> CreateAsync(ProductCreateDTO productDto)
-        {
-            var product = new Product
+        { 
+            var entity = new Product
             {
                 Name = productDto.Name,
                 Description = productDto.Description,
                 Price = productDto.Price,
-                Stock = productDto.Stock
+                Stock = productDto.Stock,
+                CreatedAt = DateTime.UtcNow
             };
+             
+            var newProduct = await _productRepository.CreateAsync(entity);
+            return MapToDTO(newProduct);
 
-            product.Id = await _productRepository.CreateAsync(product);
-            return MapToDTO(product);
         }
 
-        public async Task<bool> UpdateAsync(ProductUpdateDTO productDto)
-        {
-            var product = new Product
-            {
-                Id = productDto.Id,
-                Name = productDto.Name,
-                Description = productDto.Description,
-                Price = productDto.Price,
-                Stock = productDto.Stock
-            };
+        public async Task<bool> UpdateAsync(ProductUpdateDTO updateProductDto)
+        { 
+            var existingProduct = await _productRepository.GetByIdAsync(updateProductDto.Id);
+            if (existingProduct is null)
+                return false;
 
-            return await _productRepository.UpdateAsync(product);
+            existingProduct.Name = updateProductDto.Name ?? existingProduct.Name;
+            existingProduct.Description = updateProductDto.Description ?? existingProduct.Description;
+            existingProduct.Price = updateProductDto.Price ?? existingProduct.Price;
+            existingProduct.Stock = updateProductDto.Stock ?? existingProduct.Stock;
+            existingProduct.UpdatedAt = DateTime.UtcNow;
+
+            return await _productRepository.UpdateAsync(existingProduct);
+
         }
 
         public async Task<bool> DeleteAsync(int id)
@@ -468,10 +519,14 @@ namespace ProductAPI.Application.Services
                 product.Name,
                 product.Description,
                 product.Price,
-                product.Stock);
+                product.Stock,
+                product.CreatedAt,
+                product.UpdatedAt
+              );
         }
     }
 }
+
 ```
 **🧠 SOLID Principles:**
 
@@ -490,6 +545,7 @@ namespace ProductAPI.Application.Services
 📁 `Controllers/ProductsController.cs`
 
 ```csharp
+
 
 namespace ProductAPI.Controllers
 {
@@ -519,7 +575,7 @@ namespace ProductAPI.Controllers
                     statusCode: StatusCodes.Status200OK
                 );
 
-                //throw new Exception("Test Exception GetAllProducts---------------");
+                //throw new Exception(" Simulated Exception in Controller *********** ");
                 return Ok(response);
             }
             catch (Exception ex)
@@ -536,13 +592,12 @@ namespace ProductAPI.Controllers
 
         }
 
-        //[HttpGet("api/Products2")]
-        //public async Task<ActionResult<ApiResponse<IEnumerable<ProductResponseDTO>>>> Get()
-        //{
-        //    var products = await _productService.GetAllAsync();          
-        //    return Ok(ApiResponse<IEnumerable<ProductResponseDTO>>.SuccessResponse(products));
-        //}
-
+        [HttpGet("api/Products2")]
+        public async Task<ActionResult<ApiResponse<IEnumerable<ProductResponseDTO>>>> Get()
+        {
+            var products = await _productService.GetAllAsync();
+            return Ok(ApiResponse<IEnumerable<ProductResponseDTO>>.SuccessResponse(products));
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ApiResponse<ProductResponseDTO>>> Get(int id)
@@ -555,7 +610,8 @@ namespace ProductAPI.Controllers
 
         [HttpPost]
         public async Task<ActionResult<ApiResponse<ProductResponseDTO>>> Post([FromBody] ProductCreateDTO dto)
-        {
+        { 
+
             var product = await _productService.CreateAsync(dto);
 
             //throw new Exception("Test Exception CreatedAtAction -----------------------");
