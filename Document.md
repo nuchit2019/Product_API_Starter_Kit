@@ -813,7 +813,7 @@ app.Run();
 | Repository Pattern             | ✅     |
 | DTO Mapping                    | ✅     |
 | Middleware: Exception Handling | ✅     |
-| Middleware: Response Wrapping  | ✅     |
+| Response Wrapping  | ✅     |
 | Serilog Logging                | ✅     |
 | Dependency Injection           | ✅     |
 | Configurable Connection String | ✅     |
