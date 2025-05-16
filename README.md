@@ -123,12 +123,12 @@ dotnet run --project ProductAPI.csproj
 
 #
 
-## 📚 Next Steps
+## 📚 ขั้นตอน การ Implement
 
-* ✅ เพิ่ม Unit Tests (xUnit / Moq)
-* ✅ เพิ่ม AutoMapper / FluentValidation
-* ✅ รองรับ Pagination, Search
-* ✅ Deploy บน Docker / Azure App Service / AKS
+* ✅ 1. Download หรือ Clone Project https://github.com/nuchit2019/Product_API_Starter_Kit.git
+* ✅ 2. เปิด Task List ... แล้ว Implement ตาม Layer 
+![image](https://github.com/user-attachments/assets/946fa321-dbf4-4b3b-af4e-41e384fa4d2a)
+
 
 #
 
