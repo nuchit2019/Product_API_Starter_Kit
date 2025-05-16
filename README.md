@@ -11,7 +11,7 @@
 
 #
 
-### เอกสาร: ความรู้พื้นฐานและเครื่องมือที่ต้องใช้ 
+### เอกสาร: ความรู้พื้นฐาน และเครื่องมือที่ใช้...
 https://github.com/nuchit2019/Product_API_Starter_Kit/blob/main/Document.md
 
 ### Branch: Starter คุณควรเริ่มที่นี่:
