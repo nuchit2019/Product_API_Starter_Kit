@@ -42,8 +42,7 @@ namespace core.product.Infrastructure.Repositories
                 OUTPUT INSERTED.Id, INSERTED.Name, INSERTED.Description, INSERTED.Price, INSERTED.Stock, INSERTED.CreatedAt
                 VALUES (@Name, @Description, @Price, @Stock );
             ";
-
-            var now = DateTime.UtcNow;
+             
             var createdProduct = await connection.QuerySingleAsync<Product>(sql, new
             {
                  product.Name,
@@ -65,19 +64,17 @@ namespace core.product.Infrastructure.Repositories
                     Description = @Description,
                     Price = @Price,
                     Stock = @Stock,
-                    UpdatedAt = @UpdatedAt
+                    UpdatedAt = Getdate()
                 WHERE Id = @Id;
             ";
-
-            var updatedAt = product.UpdatedAt ?? DateTime.UtcNow;
+             
             var affectedRows = await connection.ExecuteAsync(sql, new
             {
                  product.Id,
                  product.Name,
                  product.Description,
                  product.Price,
-                 product.Stock,
-                 updatedAt
+                 product.Stock 
             });
 
             return affectedRows > 0;
