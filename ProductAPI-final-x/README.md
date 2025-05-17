@@ -1,0 +1,143 @@
+**`CRUD Product API Starter Kit`** สำหรับนักพัฒนาใหม่ที่เข้ามาใช้งานหรือพัฒนาโปรเจกต์นี้ต่อ โดยเน้นอธิบายโครงสร้าง Clean Architecture,Clean Code, SOLID Principles, วิธีรัน, และ Best Practices ที่ใช้:
+
+#
+
+ 
+# 🧱 ProductAPI(.NET 8 + Dapper + Clean Architecture)
+
+> RESTful API สำหรับจัดการสินค้า (Product CRUD)  
+> พัฒนาโดยใช้ C#, ASP.NET Core 8, Dapper, Serilog, และ Clean Architecture
+
+#
+
+## ✅ Features
+
+- 🧭 Clean Architecture (Domain, Application, Infrastructure, Presentation)
+- 🛠 Dapper (Micro ORM)
+- 🧪 API + DTO Layer
+- ⚙️ Global Exception Handling Middleware
+- 📦 Response Wrapping Middleware
+- 🔥 Logging ด้วย Serilog (Console + File)
+- 📄 Swagger UI
+
+#
+
+## 🗂️ Project Structure
+
+```bash
+ProductAPI/
+├── Domain/           # Entities + Interfaces (ไม่พึ่ง DB หรือ Framework)
+├── Application/      # DTOs + Business Logic
+├── Infrastructure/   # Repositories (Dapper)
+├── Controllers/      # WebAPI Controllers
+├── Middleware/       # Global Error & Response Wrapping Middleware
+├── Common/           # ApiResponse, CustomException
+├── appsettings.json  # Configuration
+├── Program.cs        # Main Entry
+└── Logs/             # Log Files (via Serilog)
+````
+
+#
+
+## 🚀 How to Run (Local Dev)
+
+### 1. สร้างฐานข้อมูล SQL Server
+
+```sql
+CREATE DATABASE ProductDb;
+
+CREATE TABLE Products (
+    Id INT PRIMARY KEY IDENTITY,
+    Name NVARCHAR(100) NOT NULL,
+    Price DECIMAL(18,2) NOT NULL,
+    Stock INT NOT NULL,
+    CreatedAt DATETIME NOT NULL,
+    UpdatedAt DATETIME NULL
+);
+```
+
+### 2. ปรับ `appsettings.json`
+
+```json
+"ConnectionStrings": {
+  "DefaultConnection": "Server=localhost;Database=ProductDb;Trusted_Connection=True;TrustServerCertificate=True;"
+}
+```
+
+### 3. Restore & Run
+
+```bash
+dotnet restore
+dotnet run --project ProductAPI.csproj
+```
+
+#
+
+## 📘 Sample API Endpoints
+
+| Method | Endpoint          | Description          |
+| ------ | ----------------- | -------------------- |
+| GET    | `/api/products`   | Get all products     |
+| GET    | `/api/products/1` | Get product by ID    |
+| POST   | `/api/products`   | Create new product   |
+| PUT    | `/api/products`   | Update product       |
+| DELETE | `/api/products/1` | Delete product by ID |
+
+#
+## 🧰 Logging
+
+* ติดตั้ง `Serilog` (console + file)
+* ดู log ได้ที่ `Logs/log-YYYYMMDD.txt`
+
+#
+
+## 🧱 Clean Architecture Summary
+
+| Layer          | Responsibility                         |
+| -------------- | -------------------------------------- |
+| Domain         | Entity, Interface, ไม่มีการอิง DB      |
+| Application    | DTOs, Business Logic                   |
+| Infrastructure | Dapper, SQL, Repository Implementation |
+| Presentation   | Controllers, Middleware                |
+
+#
+
+## ✨ Response Format (Wrapped)
+
+```json
+{
+  "success": true,
+  "message": null,
+  "data": [
+    {
+      "id": 1,
+      "name": "Laptop X1",
+      "price": 1200,
+      "stock": 10,
+      "createdAt": "2025-05-15T15:30:00",
+      "updatedAt": null
+    }
+  ]
+}
+```
+
+#
+
+## 📚 ขั้นตอน การ Implement
+
+* ✅ 1. Download หรือ Clone Project https://github.com/nuchit2019/Product_API_Starter_Kit.git
+* ✅ 2. เปิด Task List ... แล้ว Implement ตาม Layer 
+![image](https://github.com/user-attachments/assets/946fa321-dbf4-4b3b-af4e-41e384fa4d2a)
+
+* ✅ 3. ดับเบิ้ลคลิก บน Task ที่ต้องการ Implement ... จะเปิด หน้าต่าง Code ... 
+![image](https://github.com/user-attachments/assets/fe175e58-704f-4e93-aa98-ef2f61ced9bf)
+
+* ✅ 4. ลงมือเขียน Code ... 
+* ✅ 5. จบขั้นตอน
+#
+
+## 👨‍💻 Author
+
+> Starter Template โดยทีมพัฒนา .NET (Core System) 
+ 
+#
