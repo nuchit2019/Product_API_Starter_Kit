@@ -25,6 +25,36 @@ Clean Architecture เป็นสถาปัตยกรรมการออ�
 ![image](https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg)
 https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 
+**Dependency Rule** เป็นหัวใจหลักของ **Clean Architecture**
+
+### 🔄 **Dependency Rule คืออะไร**
+
+หมายความว่า **การพึ่งพา (Dependency)** ของแต่ละ Layer **ต้องชี้จากนอกเข้าใน (Outside → Inside)** เท่านั้น ไม่สามารถพึ่งพากลับจากภายในไปยังภายนอกได้
+#
+## 🔐 กฎ Dependency:
+
+> ### ✅ **ชั้นนอก → ชั้นใน**
+
+* ✅ Presentation → Application
+* ✅ Application → Domain
+## 🔁 สรุป Concept:
+
+| Layer              | รู้จัก Layer ใด | ห้ามรู้จัก Layer ใด  |
+| ------------------ | --------------- | -------------------- |
+| **Presentation**   | Application     | Infrastructure       |
+| **Application**    | Domain          | Infrastructure       |
+| **Domain**         | ไม่มี (Core)    | ไม่มี (Core)         |
+| **Infrastructure** | Application     | Presentation, Domain |
+
+#
+
+## ✅ ข้อดีของการยึด Dependency Rule:
+
+* แก้ไข UI, Infra, DB ได้ โดยไม่กระทบ Logic หลัก
+* ทดสอบ Application / Domain ได้ง่าย
+* เปลี่ยนจาก Oracle → MSSQL → MongoDB ได้ง่าย เพราะ Infra แยกส่วน
+
+
 #
 ### 1.2 SOLID Principles คืออะไร?
 
