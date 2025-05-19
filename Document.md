@@ -10,6 +10,7 @@ Project นี้จะแนะนำขั้นตอนการสร้า
 * 1.3 High Cohesion and Low Coupling คืออะไร?
 * 1.4 record คืออะไร?
 * 1.5 Dapper คืออะไร?
+* 1.6 Serilog คืออะไร?
 #
 
 ### 1.1 Clean Architecture คืออะไร?
@@ -290,6 +291,80 @@ https://blog.byalex.dev/article/dapper-queries-synchronized-with-mssql-database-
 2.  **SQL Server Management Studio (SSMS)** หรือเครื่องมือจัดการฐานข้อมูล SQL Server อื่นๆ
 3.  **SQL Server LocalDB** (มักจะติดตั้งมาพร้อมกับ Visual Studio)
 4.  **Postman** หรือเครื่องมืออื่นสำหรับทดสอบ API
+
+#
+### 🔹 Serilog คืออะไร?
+
+**Serilog** คือ **logging library** (ไลบรารีสำหรับบันทึก log) ที่ถูกออกแบบมาให้ใช้งานง่ายและทันสมัยใน .NET (C#) โดยมีจุดเด่นคือ:
+
+* ✅ รองรับ **structured logging** (การ log แบบมีโครงสร้าง เช่น JSON)
+* ✅ ทำงานร่วมกับ **Microsoft.Extensions.Logging** ได้ (ตัว logging built-in ของ .NET Core)
+* ✅ สามารถส่ง log ไปยังหลายที่ได้ (เช่น Console, File, Seq, Elasticsearch, Application Insights, Datadog, Grafana Loki ฯลฯ) ผ่าน **Sinks**
+* ✅ ตั้งค่าและใช้งานง่ายมาก ทั้งในโค้ดและผ่าน `appsettings.json`
+
+---
+
+### 🔹 Serilog เริ่มพัฒนาเมื่อไหร่?
+
+Serilog ถูกพัฒนาโดย **Nicholas Blumhardt**
+🔸 เปิดตัวครั้งแรกบน GitHub ในช่วง **ปี 2013**
+🔸 ปัจจุบันยังมีการพัฒนาอย่างต่อเนื่อง และเป็นหนึ่งในไลบรารียอดนิยมด้าน Logging บน .NET
+
+---
+
+### 🔹 เหมาะกับแอปพลิเคชันแบบไหน?
+
+Serilog เหมาะกับแอปที่ต้องการ **Logging ที่ดี อ่านง่าย วิเคราะห์ง่าย และขยายได้ดี** โดยเฉพาะ:
+
+#### ✅ เหมาะกับ:
+
+| ประเภทแอป                                                 | เหตุผลที่เหมาะ                                      |
+| --------------------------------------------------------- | --------------------------------------------------- |
+| 🌐 **Web API / Web Apps (.NET Core)**                     | มี Middleware, Request/Response Logging, Trace ได้  |
+| 🛠 **Microservices / Distributed Systems**                | Structured Logging ช่วยทำ Observability ได้ดี       |
+| 🧠 **Enterprise Systems**                                 | รองรับ Logging to Seq, Kibana, Grafana              |
+| 📦 **Background Services / Worker Services / Batch Jobs** | ส่ง log ไปยัง file หรือ dashboard เพื่อ monitor ได้ |
+| 🧪 **ระบบที่ต้องการ Debug / Trace อย่างละเอียด**          | Logging มี context, method, และ arguments ได้       |
+
+---
+
+### 🔹 ตัวอย่าง Log แบบ Structured (Serilog)
+
+```json
+{
+  "Timestamp": "2025-05-19T08:00:00Z",
+  "Level": "Information",
+  "MessageTemplate": "User {UserId} placed order {OrderId}",
+  "Properties": {
+    "UserId": 1234,
+    "OrderId": 5678
+  }
+}
+```
+
+> 🧠 แบบนี้ช่วยให้ระบบ Logging/Monitoring เช่น **Seq**, **Elasticsearch** หรือ **Grafana** วิเคราะห์ Log ได้ง่ายกว่าการ Log เป็นข้อความธรรมดา
+
+---
+
+### 🔹 เปรียบเทียบกับ Logger อื่น ๆ
+
+| Feature               | Serilog   | NLog           | log4net         |
+| --------------------- | --------- | -------------- | --------------- |
+| Structured Logging    | ✅ Yes     | ❌ No (Limited) | ❌ No (Limited)  |
+| ใช้งานกับ .NET Core   | ✅ ดีมาก   | ✅ รองรับ       | ⚠️ ไม่เน้น Core |
+| เรียนรู้ / ใช้งานง่าย | ✅ ง่ายมาก | ❌ ซับซ้อนกว่า  | ❌ ซับซ้อน       |
+| Output Sinks หลากหลาย | ✅ มาก     | ✅ เยอะ         | ✅ พอใช้ได้      |
+| Active Development    | ✅ มาก     | ✅ ปานกลาง      | ❌ แทบหยุดแล้ว   |
+
+---
+
+### 🔚 สรุป
+
+> **Serilog คือ Logging Library สมัยใหม่** ที่เหมาะกับ .NET Core และ Microservice เป็นอย่างยิ่ง
+> รองรับ Structured Logging, ใช้งานง่าย, รองรับหลาย Output และมี Ecosystem ที่ดีมาก
+
+หากคุณพัฒนา **Web API, Microservice, หรือ Distributed System** ด้วย .NET → Serilog คือ “ตัวเลือกที่ดีที่สุด” ณ ตอนนี้ครับ 💯
+ 
 
 #
 
