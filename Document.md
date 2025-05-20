@@ -362,8 +362,10 @@ public class ProductRepository : IProductRepository
 ```
 ## ✅ หลักการที่ถูกต้องใน `ProductRepository.cs`
 
-✅ **Single Responsibility** Repository นี้ทำแค่ “จัดการ DB” เท่านั้น
-✅ **Low Coupling**	ไม่รู้เรื่อง Business Logic หรือ API...
+✅ Single Responsibility `Repository` ทำหน้าที่จัดการ DB Logic เท่านั้น
+✅ ง่ายต่อการเปลี่ยน DB	เปลี่ยนจาก SqlConnection เป็น OracleConnection, NpgsqlConnection ได้ง่าย
+✅ Low Coupling	ไม่สนใจ Service Layer (Business Logic) หรือ API Layer...
+✅ รองรับ Unit Test	สามารถ mock IDbConnectionFactory เพื่อทดสอบ Repository แบบ isolated
 
 
 #
