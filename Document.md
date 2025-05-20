@@ -1072,6 +1072,25 @@ namespace ProductAPI.Common
 }
 ```
 
+## ✨ ResponseBody (Wrapped)
+
+```json
+{
+  "success": true,
+  "message": null,
+  "data": [
+    {
+      "id": 1,
+      "name": "Laptop X1",
+      "price": 1200,
+      "stock": 10,
+      "createdAt": "2025-05-15T15:30:00",
+      "updatedAt": null
+    }
+  ]
+}
+```
+
 📁 4.5.2 `Middleware/ExceptionMiddleware.cs`
 
 ```csharp
