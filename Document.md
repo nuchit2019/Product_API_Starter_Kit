@@ -325,8 +325,7 @@ public class ProductService : IProductService
     }
 }
 ```
-
-* 
+ 
 ## ✅ จุดเด่นของ `ProductService.cs`
 
 > ✅ High Cohesion	คลาสนี้มีหน้าที่รับผิดชอบ เฉพาะเรื่อง Business Logic
@@ -360,6 +359,7 @@ public class ProductRepository : IProductRepository
     }
 }
 ```
+
 ## ✅ หลักการที่ถูกต้องใน `ProductRepository.cs`
 
 > ✅ Single Responsibility `Repository` ทำหน้าที่จัดการ DB Logic เท่านั้น
