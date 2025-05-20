@@ -254,8 +254,25 @@ public class ProductController : ControllerBase
 
 ## 🟢 ตัวอย่างที่ดี (High Cohesion, Low Coupling) เกาะกลุ่มสูง-เชื่อมโยงต่ำ
 
+### ✅ 1. **High Cohesion:**
+
+Controller ทำหน้าที่เฉพาะเจาะจง:
+**รับ Request → เรียก Service → Return Response**
+
+* ❌ ไม่ทำ logic
+* ❌ ไม่เขียน SQL
+* ❌ ไม่เชื่อม DB
+* ✅ โฟกัสแค่การ "Routing" และ "Response"
+
+### ✅ 2. **Low Coupling:**
+
+ผูกกับแค่ `IProductService` (Interface) ไม่รู้ว่าเบื้องหลังทำยังไง
+
+* 🔁 Service จริง, mock, หรือ test double สามารถ Inject เข้าไปได้หมด
+* 🔄 เปลี่ยน Database, Business Logic หรือ Storage ได้ โดยไม่ต้องแก้ Controller
+* 
 ```csharp
-// ✅ ProductController.cs – รับผิดชอบแค่ Routing + Logging + Return
+// ✅ ProductController.cs – รับผิดชอบแค่... รับ Request → เรียก Service → Return Response
 [ApiController]
 [Route("api/products")]
 public class ProductController : ControllerBase
@@ -283,8 +300,9 @@ public class ProductController : ControllerBase
 }
 ```
 
+
 ```csharp
-// ✅ ProductService.cs – ทำหน้าที่เฉพาะเรื่องธุรกิจ
+// ✅ ProductService.cs – ทำหน้าที่เฉพาะเรื่อง Business Logic
 public class ProductService : IProductService
 {
     private readonly IProductRepository _repository;
@@ -308,6 +326,14 @@ public class ProductService : IProductService
     }
 }
 ```
+## ✅ จุดเด่นของ `ProductService.cs`
+
+✅ High Cohesion	คลาสนี้มีหน้าที่รับผิดชอบ เฉพาะเรื่อง Business Logic
+✅ Low Coupling	ใช้ IProductRepository ทำให้ไม่รู้ว่าการเข้าถึงข้อมูลใช้ Dapper, EF, หรืออะไร – เปลี่ยนได้ง่าย
+✅ Single Responsibility	ไม่สนใจการเชื่อมต่อฐานข้อมูล หรือการ mapping HTTP
+✅ Testable	Inject IProductRepository ได้ ทำให้เขียน Unit Test ง่าย
+✅ Reusable	Logic สามารถถูกเรียกใช้จาก API หรือ Background Job ได้
+
 
 ```csharp
 // ✅ ProductRepository.cs – จัดการ DB อย่างเดียว
