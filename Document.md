@@ -329,11 +329,11 @@ public class ProductService : IProductService
 * 
 ## ✅ จุดเด่นของ `ProductService.cs`
 
-✅ High Cohesion	คลาสนี้มีหน้าที่รับผิดชอบ เฉพาะเรื่อง Business Logic
-✅ Low Coupling	ใช้ IProductRepository ทำให้ไม่รู้ว่าการเข้าถึงข้อมูลใช้ Dapper, EF, หรืออะไร – เปลี่ยนได้ง่าย
-✅ Single Responsibility	ไม่สนใจการเชื่อมต่อฐานข้อมูล หรือการ mapping HTTP
-✅ Testable	Inject IProductRepository ได้ ทำให้เขียน Unit Test ง่าย
-✅ Reusable	Logic สามารถถูกเรียกใช้จาก API หรือ Background Job ได้
+> ✅ High Cohesion	คลาสนี้มีหน้าที่รับผิดชอบ เฉพาะเรื่อง Business Logic
+> ✅ Low Coupling	ใช้ IProductRepository ทำให้ไม่รู้ว่าการเข้าถึงข้อมูลใช้ Dapper, EF, หรืออะไร – เปลี่ยนได้ง่าย
+> ✅ Single Responsibility	ไม่สนใจการเชื่อมต่อฐานข้อมูล หรือการ mapping HTTP
+> ✅ Testable	Inject IProductRepository ได้ ทำให้เขียน Unit Test ง่าย
+> ✅ Reusable	Logic สามารถถูกเรียกใช้จาก API หรือ Background Job ได้
 
 
 ```csharp
@@ -362,10 +362,10 @@ public class ProductRepository : IProductRepository
 ```
 ## ✅ หลักการที่ถูกต้องใน `ProductRepository.cs`
 
-✅ Single Responsibility `Repository` ทำหน้าที่จัดการ DB Logic เท่านั้น
-✅ ง่ายต่อการเปลี่ยน DB	เปลี่ยนจาก SqlConnection เป็น OracleConnection, NpgsqlConnection ได้ง่าย
-✅ Low Coupling	ไม่สนใจ Service Layer (Business Logic) หรือ API Layer...
-✅ รองรับ Unit Test	สามารถ mock IDbConnectionFactory เพื่อทดสอบ Repository แบบ isolated
+> ✅ Single Responsibility `Repository` ทำหน้าที่จัดการ DB Logic เท่านั้น
+> ✅ ง่ายต่อการเปลี่ยน DB	เปลี่ยนจาก SqlConnection เป็น OracleConnection, NpgsqlConnection ได้ง่าย
+> ✅ Low Coupling	ไม่สนใจ Service Layer (Business Logic) หรือ API Layer...
+> ✅ รองรับ Unit Test	สามารถ mock IDbConnectionFactory เพื่อทดสอบ Repository แบบ isolated
 
 
 #
