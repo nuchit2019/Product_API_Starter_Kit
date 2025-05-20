@@ -210,31 +210,41 @@ public class ProductController : ControllerBase
         _connection = new SqlConnection("conn_string");
     }
 
-    [HttpGet]
+     [HttpGet]
     public IActionResult GetProducts()
     {
-        var sql = "SELECT * FROM Products";
-        // Logic + DB + Mapping + Response ทั้งหมดใน method เดียว
-        // ❌ รวม logic หลายหน้าที่
+        var products = new List<Product>();
+        var sql = "SELECT Id, Name, Price FROM Products";
         var cmd = new SqlCommand(sql, _connection);
-        var reader = cmd.ExecuteReader();
-        // ... mapping manual
-        return Ok(/* list */);
+        var reader = cmd.ExecuteReader(); 
+
+        while (reader.Read())
+        {
+            var product = new Product
+            {
+                Id = (int)reader["Id"],
+                Name = reader["Name"].ToString(),
+                Price = (decimal)reader["Price"]
+            };
+            products.Add(product);
+        }
+        reader.Close();
+        return Ok(products); // ❌ รวม Logic, DB, Response ใน method เดียว
     }
 
     [HttpPost]
     public IActionResult CreateProduct([FromBody] Product product)
-    {
-        var sql = $"INSERT INTO Products VALUES ('{product.Name}', {product.Price})";
-        // ❌ SQL inline, tightly coupled กับ DB
+    { 
+        var sql = $"INSERT INTO Products (Name, Price) VALUES ('{product.Name}', {product.Price})";
         var cmd = new SqlCommand(sql, _connection);
-        cmd.ExecuteNonQuery();
-        return Ok();
+        cmd.ExecuteNonQuery(); 
+
+        return Ok(new { message = "Product created successfully" });
     }
 }
 ```
 
-### 🔴 ปัญหาของโค้ดนี้
+### 🔴 ปัญหาของโค้ดนี้ 
 
 * ❌ **Low Cohesion**: Controller ทำทั้ง Connection, SQL, Mapping → ไม่แยกความรับผิดชอบ
 * ❌ **High Coupling**: Controller ผูกแน่นกับ DB และ SQL โดยตรง
