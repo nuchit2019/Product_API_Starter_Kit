@@ -8,6 +8,17 @@
 
 
 #### ✅ 2.2. สร้างตาราง...
+```sql
+CREATE TABLE Products (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(100) NOT NULL,
+    Description NVARCHAR(255),
+    Price DECIMAL(18,2) NOT NULL,
+    Stock INT NOT NULL,
+    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(),
+    UpdatedAt DATETIME NULL
+);
+```
  ![image](https://github.com/user-attachments/assets/14b083e7-9d90-4643-a95c-d2326e3baf31)
 
 
