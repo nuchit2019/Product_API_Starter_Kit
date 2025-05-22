@@ -1,8 +1,6 @@
 # 📚 ขั้นตอน การ Implement
 
-## 4️⃣ Step-by-Step การเขียน Code...
 
-![image](https://github.com/user-attachments/assets/9fb2839e-4609-469e-8cee-35d2698972eb)
 
 
 * ✅ 1. Download หรือ Clone Project https://github.com/nuchit2019/Product_API_Starter_Kit.git
@@ -13,6 +11,9 @@
 ![image](https://github.com/user-attachments/assets/fe175e58-704f-4e93-aa98-ef2f61ced9bf)
 
 * ✅ 4. ลงมือเขียน Code ... ตามรูป Step-by-Step การเขียน Code...
+* ## 4️⃣ Step-by-Step การเขียน Code...
+
+![image](https://github.com/user-attachments/assets/9fb2839e-4609-469e-8cee-35d2698972eb)
 * ✅ 5. จบขั้นตอน
 #
 
