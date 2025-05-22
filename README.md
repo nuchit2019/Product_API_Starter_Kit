@@ -6,7 +6,9 @@
 * ✅ 1. Download หรือ Clone Project https://github.com/nuchit2019/Product_API_Starter_Kit.git
 * ✅ 2. แตก Zip ... เปิด Project ... แล้ว Connect ฐานข้อมูล, สร้างฐานข้อมูล, สร้าง Table ตามรูป
 *  2.1. Connect ฐานข้อมูล, สร้างฐานข้อมูล ...
-  ![image](https://github.com/user-attachments/assets/5ac46eb2-ec5d-4246-9bec-210682e95525)
+*  ![image](https://github.com/user-attachments/assets/690323b9-2da4-4358-ba68-ceb770a1a20c)
+ ![image](https://github.com/user-attachments/assets/d3157aa8-dc40-4ff4-98f4-7d125a6a9890)
+
 
 *  2.2. สร้างตาราง...
  ![image](https://github.com/user-attachments/assets/14b083e7-9d90-4643-a95c-d2326e3baf31)
