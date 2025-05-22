@@ -485,7 +485,7 @@ Serilog เหมาะกับแอปที่ต้องการ **Loggin
 | **Ease of Setup**           | ✅ ง่ายมาก                      | ✅ ง่าย พร้อม Extension มากมาย                  | ✅ ง่าย (เพราะเป็น built-in)             |
 | **Performance**             | ✅ เร็วพอๆ กับ Serilog          | ✅ เร็วมาก                                      | ✅ เร็วพอสมควร                           |
 | **Asynchronous Logging**    | ✅ รองรับ                       | ✅ รองรับ                                       | ❌ ไม่มีในตัว                            |
-| **Structured Querying**     | ❌                              | ✅ Query ได้ เช่นใน Seq, Elasticsearch          | ❌ ไม่รองรับ                             |
+| **Structured Querying**     | ❌                              | ✅ Query ได้ เช่นใน azure log analytics,Seq, Elasticsearch          | ❌ ไม่รองรับ                             |
 | **Integration กับ ILogger** | ✅ ผ่าน Adapter                 | ✅ Native รองรับ `Microsoft.Extensions.Logging` | ✅ ผ่าน `TraceLoggerProvider` ได้        |
 | **เหมาะกับ .NET Core / 8+** | ✅ แต่ต้องติดตั้งเพิ่ม          | ✅ ดีที่สุด                                     | ⚠️ Built-in แต่ไม่เหมาะงานใหญ่          |
 
