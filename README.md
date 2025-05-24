@@ -166,4 +166,7 @@ dotnet run --project ProductAPI.csproj
 
 > Template นี้สนับสนุน โดยทีมพัฒนา (Core System)
  
-### ขอบคุณ Chat {Chatgpt,Copilot, Gemini, Deepseek, Qwen}
+---
+> *  Nuchita-นุชิตะ
+> *  2025-05-24
+> *  ขอบคุณ ChatBot ทุกตัว
