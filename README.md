@@ -167,6 +167,6 @@ dotnet run --project ProductAPI.csproj
 > Template นี้สนับสนุน โดยทีมพัฒนา (Core System)
  
 ---
-> *  Nuchita-นุชิตะ
+> *  Nuchito-นุชิโตะ
 > *  2025-05-03
 > *  ขอบคุณ ChatBot ทุกตัว
