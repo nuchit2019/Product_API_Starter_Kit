@@ -71,6 +71,28 @@ core.api --> core.category
 
 ---
 
+## SQL สำหรับสร้างตาราง `Category` บน **Microsoft SQL Server (MSSQL)** ที่เหมาะกับระบบสินค้าทั่วไป (สามารถปรับแต่งคอลัมน์เพิ่มตามต้องการ):
+
+```sql
+CREATE TABLE Category (
+    CategoryId INT IDENTITY(1,1) PRIMARY KEY,  -- Primary Key, Auto Increment
+    Name NVARCHAR(100) NOT NULL,               -- ชื่อหมวดหมู่ (จำเป็น)
+    Description NVARCHAR(255) NULL,            -- รายละเอียด (ไม่บังคับ)
+    IsActive BIT NOT NULL DEFAULT 1,           -- สถานะใช้งาน (1=ใช้งาน, 0=ไม่ใช้งาน)
+    CreatedAt DATETIME NOT NULL DEFAULT GETDATE(), -- วันเวลาที่สร้าง
+    UpdatedAt DATETIME NULL                    -- วันเวลาที่อัปเดตล่าสุด
+);
+```
+
+## ถ้าต้องการ Foreign Key กับ Product (กรณีหนึ่งสินค้าต่อหนึ่งหมวดหมู่):
+
+```sql
+ALTER TABLE Product
+ADD CategoryId INT NOT NULL
+    CONSTRAINT FK_Product_Category FOREIGN KEY (CategoryId) REFERENCES Category(CategoryId);
+```
+
+
 ## 🧠 ขั้นตอนที่ 3: สร้าง Class และ Layer
 
 ### 3.1 `core.category.domain`
