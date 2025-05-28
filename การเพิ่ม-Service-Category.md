@@ -60,7 +60,9 @@ https://github.com/nuchit2019/Product_API_Starter_Kit/tree/Final-x
 Multi Project...Final-x2 ... Code final Service Category 
 https://github.com/nuchit2019/Product_API_Starter_Kit/tree/Final-x2
 
-git clone https://github.com/nuchit2019/Product_API_Starter_Kit.git
+```bash
+git clone -b Final-x2 https://github.com/nuchit2019/Product_API_Starter_Kit.git
+```
 
 #
 
