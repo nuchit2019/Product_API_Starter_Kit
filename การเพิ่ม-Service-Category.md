@@ -37,7 +37,8 @@ ProductAPI-final-x/
     │   ├── core.product.application/
     │   ├── core.product.domain/
     │   ├── core.product.infrastructure/
-    ├── ***core.category***/
+********************************************
+    ├── core.category/
     │   ├── core.category.application/
     │   ├── core.category.domain/
     │   ├── core.category.infrastructure/ 
@@ -47,42 +48,26 @@ ProductAPI-final-x/
 
 ## 🚀 ขั้นตอนที่ 1: เพิ่ม Project ใหม่
 
-ให้เพิ่ม 4 Project สำหรับ `Category`
+ให้เพิ่ม  Project สำหรับ `Category`
 
-```bash
-cd src
-mkdir core.category
-cd core.category
+ให้ Download Multi Project
+https://github.com/nuchit2019/Product_API_Starter_Kit/tree/Final-x
 
-dotnet new classlib -n core.category.domain
-dotnet new classlib -n core.category.application
-dotnet new classlib -n core.category.infrastructure
-dotnet new classlib -n core.category.persistence
-```
+แตก Zip ... เปิด Solution ...
+เพิ่ม Project Class Library ... ดังรูป
 
-จากนั้นเพิ่มทั้ง 4 Project เข้าไปใน Solution
+![image](https://github.com/user-attachments/assets/c96c40c4-e798-4bf7-b397-db5a050cbb83)
 
-```bash
-dotnet sln ../../core.final-x.sln add core.category.*
-```
 
 ---
 
 ## 🔁 ขั้นตอนที่ 2: เชื่อมโยง Project References
 
 ตั้งค่าการอ้างอิงระหว่าง Layer:
+core.api --> core.category
 
-```bash
-dotnet add core.category.application reference core.category.domain
-dotnet add core.category.infrastructure reference core.category.application core.category.domain
-dotnet add core.category.persistence reference core.category.application core.category.domain
-```
+ ![image](https://github.com/user-attachments/assets/06287454-14e8-412e-806f-a7a095aaee2c)
 
-ใน `core.api` ให้เพิ่ม Reference:
-
-```bash
-dotnet add ../core.api/core.api.csproj reference ../core.category.infrastructure/core.category.infrastructure.csproj
-```
 
 ---
 
