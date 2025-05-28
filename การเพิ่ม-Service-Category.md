@@ -59,6 +59,9 @@ https://github.com/nuchit2019/Product_API_Starter_Kit/tree/Final-x
 
 Multi Project...Final-x2 ... Code final Service Category 
 https://github.com/nuchit2019/Product_API_Starter_Kit/tree/Final-x2
+
+git clone https://github.com/nuchit2019/Product_API_Starter_Kit.git
+
 #
 
 แตก Zip ... เปิด Solution ...
