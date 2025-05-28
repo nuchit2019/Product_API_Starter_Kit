@@ -64,6 +64,9 @@ https://github.com/nuchit2019/Product_API_Starter_Kit/tree/Final-x2
 git clone -b Final-x2 https://github.com/nuchit2019/Product_API_Starter_Kit.git
 ```
 
+หรือจะคลิกเพื่อเปิดหน้า repository:
+[https://github.com/nuchit2019/Product\_API\_Starter\_Kit/tree/Final-x2](https://github.com/nuchit2019/Product_API_Starter_Kit/tree/Final-x2)
+
 #
 
 แตก Zip ... เปิด Solution ...
