@@ -28,13 +28,20 @@ ProductAPI-final-x/
 
 เพิ่ม Service `core.category` แบบครบถ้วน ประกอบด้วย:
 
-* Domain Layer
-* Application Layer
-* Infrastructure Layer
-* Persistence Layer
-* API Layer (เพิ่ม Endpoint ใน `core.api`)
-* Unit Testing
-* ทดสอบผ่าน `http` หรือ Postman
+```
+ProductAPI-final-x/
+├── core.final-x.sln
+└── src/
+    ├── core.api/
+    ├── core.product/
+    │   ├── core.product.application/
+    │   ├── core.product.domain/
+    │   ├── core.product.infrastructure/
+    ├── ***core.category***/
+    │   ├── core.category.application/
+    │   ├── core.category.domain/
+    │   ├── core.category.infrastructure/ 
+```
 
 ---
 
