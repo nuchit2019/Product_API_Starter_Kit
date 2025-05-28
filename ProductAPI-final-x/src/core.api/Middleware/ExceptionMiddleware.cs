@@ -1,5 +1,3 @@
-﻿ 
-
 using System.Text.Json;
 using System.Diagnostics;
 using System.Text;
@@ -58,8 +56,8 @@ namespace core.api.Middleware
                 var className = declaringType?.DeclaringType?.Name ?? declaringType?.Name ?? "UnknownClass";
                 var lineNumber = frame?.GetFileLineNumber();
 
-                // Compose Error Detail
-                var errorDetail = $"Class: {className}, Method: {methodName}, Line: {lineNumber}, Action: {actionName}, Request: {requestBody}";
+                // Compose Error Detail (include exception message)
+                var errorDetail = $"Class: {className}, Method: {methodName}, Line: {lineNumber}, Action: {actionName}, Request: {requestBody}, ExceptionMessage: {ex.Message}";
 
                 // Log
                 _logger.LogError(ex, "Exception occurred: {ErrorDetail}", errorDetail);
@@ -71,7 +69,7 @@ namespace core.api.Middleware
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-                var response = ApiResponse<object>.FailResponse("Internal Server Error", 500, errorDetail);               
+                var response = ApiResponse<object>.FailResponse("Internal Server Error", 500, errorDetail);
 
                 var json = JsonSerializer.Serialize(response);
                 await context.Response.WriteAsync(json);
