@@ -55,7 +55,7 @@ ProductAPI-final-x/
 ให้ Download Multi Project...Final-x ... Starter Add Service Category
 https://github.com/nuchit2019/Product_API_Starter_Kit/tree/Final-x
 
-## Final:
+## Final: สำหรับตรวจสอบ...
 
 Multi Project...Final-x2 ... Code final Service Category
 ```bash
