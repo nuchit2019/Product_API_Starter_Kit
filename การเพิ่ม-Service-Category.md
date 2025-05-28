@@ -71,7 +71,7 @@ core.api --> core.category
 
 ---
 
-## SQL สำหรับสร้างตาราง `Category` บน **Microsoft SQL Server (MSSQL)** ที่เหมาะกับระบบสินค้าทั่วไป (สามารถปรับแต่งคอลัมน์เพิ่มตามต้องการ):
+## ✅  ขั้นตอนที่ 3: SQ สร้างตาราง `Category` บน **Microsoft SQL Server (MSSQL)** ที่เหมาะกับระบบสินค้าทั่วไป (สามารถปรับแต่งคอลัมน์เพิ่มตามต้องการ):
 
 ```sql
 CREATE TABLE Category (
@@ -84,7 +84,7 @@ CREATE TABLE Category (
 );
 ```
 
-## ถ้าต้องการ Foreign Key กับ Product (กรณีหนึ่งสินค้าต่อหนึ่งหมวดหมู่):
+## ✅  ขั้นตอนที่ 4: ถ้าต้องการ Foreign Key กับ Product (กรณีหนึ่งสินค้าต่อหนึ่งหมวดหมู่):
 
 ```sql
 ALTER TABLE Product
@@ -93,9 +93,9 @@ ADD CategoryId INT NOT NULL
 ```
 
 
-## 🧠 ขั้นตอนที่ 3: สร้าง Class และ Layer
+## ✅  ขั้นตอนที่ 5: สร้าง Class และ Layer
 
-### 3.1 `core.category.domain`
+### 5.1 `core.category.domain`
 
 ```csharp
 namespace Core.Category.Domain.Entities;
@@ -111,24 +111,24 @@ public class Category
 }
 ```
 
-### 3.2 `core.category.application`
+### ✅ 5.2 `core.category.application`
 
 * Interface `ICategoryService`
 * DTO: `CreateCategoryRequest`, `CategoryDto`
 
-### 3.3 `core.category.infrastructure`
+### ✅ 5.3 `core.category.infrastructure`
 
 * Implement `ICategoryService`
 * Add Business Logic
 
-### 3.4 `core.category.persistence`
+### ✅ 5.4 `core.category.persistence`
 
-* สร้าง `ICategoryRepository`, `CategoryRepository` (ใช้ Dapper หรือ EF Core)
+* สร้าง `ICategoryRepository`, `CategoryRepository` (ใช้ Dapper)
 * เชื่อมต่อ DB MSSQL
 
 ---
 
-## 🌐 ขั้นตอนที่ 4: เพิ่ม Endpoint ใน `core.api`
+## 🌐 ขั้นตอนที่ 6: เพิ่ม Endpoint ใน `core.api`
 
 ใน `core.api/Controllers/CategoryController.cs`
 
@@ -159,7 +159,7 @@ public class CategoryController : ControllerBase
 
 ---
 
-## 🛠 ขั้นตอนที่ 5: ลงทะเบียน DI ใน `Program.cs`
+## 🛠 ขั้นตอนที่ 7: ลงทะเบียน DI ใน `Program.cs`
 
 ```csharp
 builder.Services.AddScoped<ICategoryService, CategoryService>();
@@ -168,7 +168,7 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 ---
 
-## 🧪 ขั้นตอนที่ 6: ทดสอบ API
+## 🧪 ขั้นตอนที่ 8: ทดสอบ API
 
 ใน `core.api/api.http` หรือ Postman:
 
