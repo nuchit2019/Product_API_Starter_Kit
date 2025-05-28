@@ -50,7 +50,7 @@ ProductAPI-final-x/
 
 ให้เพิ่ม  Project สำหรับ `Category`
 
-## Starter:
+## Starter: สำหรับการฝึก...
 
 ให้ Download Multi Project...Final-x ... Starter Add Service Category
 https://github.com/nuchit2019/Product_API_Starter_Kit/tree/Final-x
